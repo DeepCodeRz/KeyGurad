@@ -1,10 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>KeyGuard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeyGuard Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
 </head>
 <body>
+<div class="dashboard">
+    <aside class="sidebar">
+        <div class="logo">
+            <i class="ri-shield-keyhole-line"></i>
+            KeyGuard
+        </div>
+        <ul class="nav-links">
+            <li><a href="#passwords" class="active"><i class="ri-key-2-line"></i> Şifreler</a></li>
+            <li><a href="#generator"><i class="ri-magic-line"></i> Şifre Oluşturucu</a></li>
+            <li><a href="#analyzer"><i class="ri-shield-check-line"></i> Şifre Analizi</a></li>
+        </ul>
+    </aside>
+    <main class="main-content">
+        <div id="passwords" class="tab-content active">
+            <h2>Şifrelerim</h2>
+            <div class="password-list">
+                <div class="password-item">
+                    <div>
+                        <strong>example.com</strong>
+                        <span style="color: var(--secondary-text-color);">kullanici@ornek.com</span>
+                    </div>
+                    <div class="password-actions">
+                        <button class="btn btn-icon" aria-label="Şifreyi göster/gizle"><i class="ri-eye-line"></i></button>
+                        <button class="btn btn-icon" aria-label="Şifreyi kopyala"><i class="ri-clipboard-line"></i></button>
+                        <button class="btn btn-icon" aria-label="Şifreyi düzenle"><i class="ri-edit-line"></i></button>
+                        <button class="btn btn-icon" aria-label="Şifreyi sil"><i class="ri-delete-bin-line"></i></button>
+                    </div>
+                </div>
+                <div class="password-item">
+                    <div>
+                        <strong>socialnetwork.com</strong>
+                        <span style="color: var(--secondary-text-color);">johndoe</span>
+                    </div>
+                    <div class="password-actions">
+                        <button class="btn btn-icon" aria-label="Şifreyi göster/gizle"><i class="ri-eye-line"></i></button>
+                        <button class="btn btn-icon" aria-label="Şifreyi kopyala"><i class="ri-clipboard-line"></i></button>
+                        <button class="btn btn-icon" aria-label="Şifreyi düzenle"><i class="ri-edit-line"></i></button>
+                        <button class="btn btn-icon" aria-label="Şifreyi sil"><i class="ri-delete-bin-line"></i></button>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary" style="margin-top: 1rem;">
+                <i class="ri-add-line"></i> Yeni Şifre Ekle
+            </button>
+        </div>
+        <div id="generator" class="tab-content">
+            <h2>Güvenli Şifre Oluşturucu</h2>
+            <form>
+                <div class="form-group">
+                    <label for="password-length">Şifre Uzunluğu:</label>
+                    <input type="number" id="password-length" min="8" max="32" value="12">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" checked> Büyük harf içersin
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" checked> Sayı içersin
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" checked> Özel karakter içersin
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Şifre Oluştur</button>
+            </form>
+            <div class="form-group" style="margin-top: 1rem;">
+                <label for="generated-password">Oluşturulan Şifre:</label>
+                <input type="text" id="generated-password" readonly value="X7$mK9pL#qR2">
+            </div>
+        </div>
+        <div id="analyzer" class="tab-content">
+            <h2>Şifre Güvenlik Analizi</h2>
+            <form>
+                <div class="form-group">
+                    <label for="password-to-analyze">Analiz Edilecek Şifre:</label>
+                    <input type="password" id="password-to-analyze" placeholder="Şifrenizi girin">
+                </div>
+                <button type="submit" class="btn btn-primary">Analiz Et</button>
+            </form>
+            <div class="password-strength">
+                <h3>Şifre Gücü: <span id="strength-text">Orta</span></h3>
+                <div class="strength-meter">
+                    <div class="strength-meter-fill medium" style="width: 60%;"></div>
+                </div>
+                <ul style="margin-top: 1rem; color: var(--secondary-text-color);">
+                    <li>Şifreniz en az 12 karakter uzunluğunda olmalıdır.</li>
+                    <li>Büyük ve küçük harfler kullanın.</li>
+                    <li>Sayılar ve özel karakterler ekleyin.</li>
+                    <li>Tahmin edilmesi kolay kelimeler veya sıralar kullanmayın.</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="{{ url_for('static', filename='addPassword.js')}}"></script>
+<script src="{{ url_for('static', filename='createPassword.js')}}"></script>
+<script src="{{ url_for('static', filename='scurityCheck.js')}}"></script>
+<script src="{{ url_for('static', filename='tabs.js')}}"></script>
 
 </body>
 </html>
