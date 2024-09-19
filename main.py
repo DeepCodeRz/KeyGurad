@@ -1,5 +1,27 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 import random
+import sqlite3
+
+"""conn = sqlite3.connect('identifier.sqlite')
+c = conn.cursor()
+
+insert_query = '''
+INSERT INTO password_info (website, username, password, previous_ver)
+VALUES (?, ?, ?, ?)
+'''
+
+c.execute(insert_query, ('example.com', 'user123', 'password123', None))
+
+conn.commit()
+
+select_query = 'SELECT * FROM password_info'
+c.execute(select_query)
+
+rows = c.fetchall()
+for row in rows:
+    print(row)
+
+conn.close()"""
 app = Flask(__name__)
 
 @app.route('/')
