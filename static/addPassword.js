@@ -3,6 +3,7 @@ const addPasswordBtn = document.getElementById("addPasswordBtn");
 const addPasswordModal = document.getElementById("addPasswordModal");
 const savePasswordBtn = document.getElementById("savePasswordBtn");
 const closeModal = document.getElementById("closeModal");
+let password_id;
 
 
 addPasswordBtn.addEventListener("click", function() {
@@ -23,11 +24,10 @@ savePasswordBtn.addEventListener("click", function(event) {
     }).then(response => {return response.json()})
         .then(data => {
 
-        })
-
-    const newPassword = document.createElement("div");
-    newPassword.className = "password-item";
-    newPassword.innerHTML = `<div>
+            password_id = data["password_id"]
+            const newPassword = document.createElement("div");
+            newPassword.className = "password-item";
+            newPassword.innerHTML = `<div>
                                  <strong>Website:</strong>
                                  <span style="color: var(--secondary-text-color);">${website}</span>
                                  <br>
@@ -35,16 +35,17 @@ savePasswordBtn.addEventListener("click", function(event) {
                                  <span style="color: var(--secondary-text-color);">${username}</span>
                                  <br>
                                  <strong>Password:</strong>
-                                 <span class="hidden" style="color: var(--secondary-text-color);">${password}</span>
+                                 <span id="${password_id}" class="hidden" style="color: var(--secondary-text-color);">${password}</span>
                              </div>
                              <div class="password-actions">
-                                <button class="btn btn-icon" aria-label="Show/Hide Password"><i class="ri-eye-line"></i></button>
+                                <button id="t" class="btn btn-icon" aria-label="Show/Hide Password" onclick="changePasswordVisibility()"><i class="ri-eye-line"></i></button>
                                 <button class="btn btn-icon" aria-label="Copy Password"><i class="ri-clipboard-line"></i></button>
                                 <button class="btn btn-icon" aria-label="Edit Password"><i class="ri-edit-line"></i></button>
                                 <button class="btn btn-icon" aria-label="Delete Password"><i class="ri-delete-bin-line"></i></button>
                              </div>`;
 
-    passwordList.appendChild(newPassword);
+            passwordList.appendChild(newPassword);
+        })
 
     document.getElementById("addPasswordForm").reset()
     addPasswordModal.style.display = "none";

@@ -56,6 +56,14 @@ def addNewPassword():
 
     conn.commit()
 
+
+    id_query = '''SELECT password_id FROM password_info ORDER BY password_id DESC LIMIT 1;'''
+    c.execute(id_query)
+
+    password_id = c.fetchone()[0]
+
+    return jsonify({'password_id': password_id})
+
 # Getting needed options data via JavaScript to create the passwords with right criteria.
 @app.route('/options', methods=['POST'])
 def options():
