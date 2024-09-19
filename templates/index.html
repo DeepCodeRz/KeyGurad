@@ -17,10 +17,10 @@
         </div>
         <ul class="nav-links">
             <li><a href="#passwords" class="active"><i class="ri-key-2-line"></i> Passwords</a></li>
-            <li><a href="#generator"><i class="ri-magic-line"></i> Password Generator</a></li>
+            <li><a href="#generator"><i class="ri-add-circle-line"></i> Password Generator</a></li>
             <li><a href="#analyzer"><i class="ri-shield-check-line"></i> Password Analysis</a></li>
-            <li><a href="#analyzer"><i class="ri-shield-check-line"></i> Browser Extension</a></li>
-            <li><a href="#analyzer"><i class="ri-shield-check-line"></i> Settings</a></li>
+            <li><a href="#analyzer"><i class="ri-links-line"></i> Browser Extension</a></li>
+            <li><a href="#analyzer"><i class="ri-settings-3-line"></i> Settings</a></li>
         </ul>
     </aside>
     <main class="main-content">
@@ -52,39 +52,69 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-primary" style="margin-top: 1rem;">
+            <button id="addPasswordBtn" class="btn btn-primary" style="margin-top: 1rem;">
                 <i class="ri-add-line"></i> Add New Password
             </button>
         </div>
-        <div id="generator" class="tab-content">
-            <h2>Secure Password Generator</h2>
-            <form>
-                <div class="form-group">
-                    <label for="password-length">Password Length:</label>
-                    <input type="number" id="password-length" min="8" max="32" value="12">
-                </div>
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" checked> Include uppercase letters
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" checked> Include numbers
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" checked> Include special characters
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-primary">Generate Password</button>
-            </form>
-            <div class="form-group" style="margin-top: 1rem;">
-                <label for="generated-password">Generated Password:</label>
-                <input type="text" id="generated-password" readonly value="X7$mK9pL#qR2">
+
+        <div id="addPasswordModal" class="modal">
+            <div class="modal-content">
+                <span id="closeModal" class="close">&times;</span>
+                <h2>Add New Password</h2>
+                <form id="addPasswordForm">
+                    <div class="form-group">
+                        <label for="website">Website:</label>
+                        <input type="text" id="website" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
             </div>
         </div>
+
+        <div id="generator" class="tab-content">
+            <h2>Secure Password Generator</h2>
+            <div class="form-group">
+                <label for="length" typeof="text">Length:</label>
+                <input type="range" id="length" name="length" min="8" max="20" oninput="this.nextElementSibling.value = this.value">
+                <output>14</output>
+            </div>
+
+            <div class="form-group">
+                <label>Content:</label>
+                <div class="content-options">
+                    <label><input type="checkbox" id="uppercase"> Uppercase (A-Z)</label><br>
+                    <label><input type="checkbox" id="lowercase"> Lowercase (a-z)</label><br>
+                    <label><input type="checkbox" id="numbers"> Number (0-9)</label><br>
+                    <label><input type="checkbox" id="special"> Special Characters (!#$%&()*+-./:;<=>?)</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="keyword">Keyword:</label>
+                <input type="text" id="keyword" name="keyword">
+            </div>
+
+            <button class="btn btn-primary" id="generateBtn">Create Password</button>
+
+            <div class="form-group" style="margin-top: 1rem;">
+                <label for="generated-password">Generated Password:</label>
+                <input class="hidden" type="text" id="generated-password" readonly>
+            </div>
+
+            <div class="result">
+                <button class="btn" id="copy" onclick="copy()">Copy</button>
+                <button class="btn" id="showHide" onclick="showHide()">Show password</button>
+            </div>
+        </div>
+
         <div id="analyzer" class="tab-content">
             <h2>Password Security Analysis</h2>
             <form>
@@ -94,6 +124,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Analyze</button>
             </form>
+
             <div class="password-strength">
                 <h3>Password Strength: <span id="strength-text">Medium</span></h3>
                 <div class="strength-meter">
