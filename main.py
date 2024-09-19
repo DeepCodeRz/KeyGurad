@@ -2,10 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 import random
 import sqlite3
 
-"""conn = sqlite3.connect('identifier.sqlite')
-c = conn.cursor()
-
-insert_query = '''
+"""insert_query = '''
 INSERT INTO password_info (website, username, password, previous_ver)
 VALUES (?, ?, ?, ?)
 '''
@@ -38,6 +35,26 @@ special_list = "!#$%&()*+-./:;<=>?"
 @app.route('/')
 def home():
     return render_template('index.html')
+
+
+@app.route('/addNewPassword', methods=['POST'])
+def addNewPassword():
+    conn = sqlite3.connect('identifier.sqlite')
+    c = conn.cursor()
+
+    data = request.json
+    website = data['website']
+    username = data['username']
+    password = data['password']
+
+    insert_query = '''
+    INSERT INTO password_info (website, username, password, previous_ver)
+    VALUES (?, ?, ?, ?)
+    '''
+
+    c.execute(insert_query, (website, username, password, None))
+
+    conn.commit()
 
 # Getting needed options data via JavaScript to create the passwords with right criteria.
 @app.route('/options', methods=['POST'])
@@ -220,6 +237,8 @@ def options():
     password = (" ".join(password).replace(" ", "")) # Password will be reformatted to be readable.
 
     return jsonify({'password': password}) # Password will be sent to Front-End.
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

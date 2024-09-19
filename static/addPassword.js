@@ -16,6 +16,15 @@ savePasswordBtn.addEventListener("click", function(event) {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
+    fetch('/addNewPassword', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({website, username, password})
+    }).then(response => {return response.json()})
+        .then(data => {
+
+        })
+
     const newPassword = document.createElement("div");
     newPassword.className = "password-item";
     newPassword.innerHTML = `<div>
@@ -26,7 +35,7 @@ savePasswordBtn.addEventListener("click", function(event) {
                                  <span style="color: var(--secondary-text-color);">${username}</span>
                                  <br>
                                  <strong>Password:</strong>
-                                 <span style="color: var(--secondary-text-color);">${password}</span>
+                                 <span class="hidden" style="color: var(--secondary-text-color);">${password}</span>
                              </div>
                              <div class="password-actions">
                                 <button class="btn btn-icon" aria-label="Show/Hide Password"><i class="ri-eye-line"></i></button>
@@ -37,6 +46,7 @@ savePasswordBtn.addEventListener("click", function(event) {
 
     passwordList.appendChild(newPassword);
 
+    document.getElementById("addPasswordForm").reset()
     addPasswordModal.style.display = "none";
 })
 

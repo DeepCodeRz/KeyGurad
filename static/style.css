@@ -115,6 +115,11 @@ h2 {
     gap: 0.5rem;
 }
 
+.hidden {
+    font-weight: bold;
+    -webkit-text-security: disc;
+}
+
 .btn {
     padding: 0.5rem 1rem;
     border: none;
