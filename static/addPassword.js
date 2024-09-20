@@ -41,20 +41,47 @@ savePasswordBtn.addEventListener("click", function(event) {
                                  <span id="${password_id}" class="hidden" style="color: var(--secondary-text-color);">${password}</span>
                              </div>
                              <div class="password-actions">
-                                <button id="visibility-${password_id}" class="btn btn-icon" aria-label="Show/Hide Password" onclick="changePasswordVisibility()"><i class="ri-eye-line"></i></button>
-                                <button class="btn btn-icon" aria-label="Copy Password"><i class="ri-clipboard-line"></i></button>
-                                <button class="btn btn-icon" aria-label="Edit Password"><i class="ri-edit-line"></i></button>
-                                <button class="btn btn-icon" aria-label="Delete Password"><i class="ri-delete-bin-line"></i></button>
+                                <button id="visibility-${password_id}" class="btn btn-icon" aria-label="Show/Hide Password"><i class="ri-eye-line"></i></button>
+                                <button id="copy-${password_id}" class="btn btn-icon" aria-label="Copy Password"><i class="ri-clipboard-line"></i></button>
+                                <button id="edit-${password_id}" class="btn btn-icon" aria-label="Edit Password"><i class="ri-edit-line"></i></button>
+                                <button id="delete-${password_id}" class="btn btn-icon" aria-label="Delete Password"><i class="ri-delete-bin-line"></i></button>
                              </div>`;
 
 
             passwordList.appendChild(newPassword);
 
             const visibilityBtn = document.getElementById(`visibility-${password_id}`);
+            const copyBtn = document.getElementById(`copy-${password_id}`);
+
             const passwordContent = document.getElementById(`${password_id}`);
+
             visibilityBtn.addEventListener("click", function() {
+                if (passwordContent.classList.contains('hidden')) {
+                    visibilityBtn.innerHTML = `<i class="ri-eye-off-line"></i>`;
+                } else {
+                    visibilityBtn.innerHTML = `<i class="ri-eye-line"></i>`;
+                }
+
                 passwordContent.classList.toggle('hidden')
             })
+
+            copyBtn.addEventListener("click", function() {
+                if (passwordContent.classList.contains('hidden')) {
+                    passwordContent.classList.remove('hidden')
+                    navigator.clipboard.writeText(passwordContent.innerText);
+                    passwordContent.classList.add('hidden')
+                } else {
+                    navigator.clipboard.writeText(passwordContent.innerText);
+                }
+
+                copyBtn.innerHTML = `<i class="ri-check-line"></i>`;
+
+                setTimeout(function() {
+                    copyBtn.innerHTML = `<i class="ri-clipboard-line"></i>`;
+                }, 2000);
+
+            })
+
 
         })
 
