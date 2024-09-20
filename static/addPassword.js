@@ -21,8 +21,11 @@ savePasswordBtn.addEventListener("click", function(event) {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({website, username, password})
-    }).then(response => {return response.json()})
+    }).then(response => {
+        return response.json()
+    })
         .then(data => {
+
 
             password_id = data["password_id"]
             const newPassword = document.createElement("div");
@@ -38,19 +41,28 @@ savePasswordBtn.addEventListener("click", function(event) {
                                  <span id="${password_id}" class="hidden" style="color: var(--secondary-text-color);">${password}</span>
                              </div>
                              <div class="password-actions">
-                                <button id="t" class="btn btn-icon" aria-label="Show/Hide Password" onclick="changePasswordVisibility()"><i class="ri-eye-line"></i></button>
+                                <button id="visibility-${password_id}" class="btn btn-icon" aria-label="Show/Hide Password" onclick="changePasswordVisibility()"><i class="ri-eye-line"></i></button>
                                 <button class="btn btn-icon" aria-label="Copy Password"><i class="ri-clipboard-line"></i></button>
                                 <button class="btn btn-icon" aria-label="Edit Password"><i class="ri-edit-line"></i></button>
                                 <button class="btn btn-icon" aria-label="Delete Password"><i class="ri-delete-bin-line"></i></button>
                              </div>`;
 
+
             passwordList.appendChild(newPassword);
+
+            const visibilityBtn = document.getElementById(`visibility-${password_id}`);
+            const passwordContent = document.getElementById(`${password_id}`);
+            visibilityBtn.addEventListener("click", function() {
+                passwordContent.classList.toggle('hidden')
+            })
+
         })
 
     document.getElementById("addPasswordForm").reset()
     addPasswordModal.style.display = "none";
-})
 
-closeModal.addEventListener("click", function() {
-    addPasswordModal.style.display = "none";
+
+    closeModal.addEventListener("click", function () {
+        addPasswordModal.style.display = "none";
+    })
 })
