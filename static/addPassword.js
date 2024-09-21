@@ -2,7 +2,11 @@ let passwordList = document.getElementsByClassName("password-list")[0];
 const addPasswordBtn = document.getElementById("addPasswordBtn");
 const addPasswordModal = document.getElementById("addPasswordModal");
 const savePasswordBtn = document.getElementById("savePasswordBtn");
-const closeModal = document.getElementById("closeModal");
+const closeAddPasswordModal = document.getElementById("closeAddPasswordModal");
+const deletePasswordModal = document.getElementById("deletePasswordModal");
+const confirmDeletePassword = document.getElementById("confirmDeletePasswordBtn");
+const cancelDeletePassword = document.getElementById("cancelDeletePasswordBtn");
+const closeDeletePasswordModal = document.getElementById("closeAddPasswordModal");
 let password_id;
 
 
@@ -25,10 +29,9 @@ savePasswordBtn.addEventListener("click", function(event) {
         return response.json()
     })
         .then(data => {
-
-
             password_id = data["password_id"]
             const newPassword = document.createElement("div");
+
             newPassword.className = "password-item";
             newPassword.innerHTML = `<div>
                                  <strong>Website:</strong>
@@ -52,6 +55,7 @@ savePasswordBtn.addEventListener("click", function(event) {
 
             const visibilityBtn = document.getElementById(`visibility-${password_id}`);
             const copyBtn = document.getElementById(`copy-${password_id}`);
+            const deleteBtn = document.getElementById(`delete-${password_id}`);
 
             const passwordContent = document.getElementById(`${password_id}`);
 
@@ -82,6 +86,31 @@ savePasswordBtn.addEventListener("click", function(event) {
 
             })
 
+            deleteBtn.addEventListener("click", function() {
+                deletePasswordModal.style.display = "block";
+
+                confirmDeletePassword.addEventListener("click", function() {
+
+                    console.log(password_id);
+                    fetch('/deletePassword', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({password_id})
+                    })
+
+                    deletePasswordModal.style.display = "none";
+                })
+
+                cancelDeletePassword.addEventListener("click", function() {
+                    deletePasswordModal.style.display = "none";
+                })
+
+                closeDeletePasswordModal.addEventListener("click", function() {
+                    deletePasswordModal.style.display = "none";
+                })
+
+            })
+
 
         })
 
@@ -89,7 +118,7 @@ savePasswordBtn.addEventListener("click", function(event) {
     addPasswordModal.style.display = "none";
 
 
-    closeModal.addEventListener("click", function () {
+    closeAddPasswordModal.addEventListener("click", function () {
         addPasswordModal.style.display = "none";
     })
 })

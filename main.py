@@ -53,9 +53,7 @@ def addNewPassword():
     '''
 
     c.execute(insert_query, (website, username, password, None))
-
     conn.commit()
-
 
     id_query = '''SELECT password_id FROM password_info ORDER BY password_id DESC LIMIT 1;'''
     c.execute(id_query)
@@ -63,6 +61,17 @@ def addNewPassword():
     password_id = c.fetchone()[0]
 
     return jsonify({'password_id': password_id})
+
+@app.route('/deletePassword', methods=['POST'])
+def deletePassword():
+    conn = sqlite3.connect('identifier.sqlite')
+    c = conn.cursor()
+
+    data = request.get_json()
+    password_id = data.get('password_id')
+
+    delete_query = '''DELETE FROM password_info WHERE password_id = ?'''
+    c.execute(delete_query, (password_id,))
 
 # Getting needed options data via JavaScript to create the passwords with right criteria.
 @app.route('/options', methods=['POST'])
@@ -249,4 +258,4 @@ def options():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    app.run(debug=True, port=5002)
