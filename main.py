@@ -63,6 +63,24 @@ def addNewPassword():
 
     return jsonify({'password_id': password_id})
 
+@app.route('/editPassword', methods=['POST'])
+def editPassword():
+    conn = sqlite3.connect('identifier.sqlite')
+    c = conn.cursor()
+
+    data = request.json
+    password_id = data['password_id']
+    website = data['editedWebsite']
+    username = data['editedUsername']
+    password = data['editedPassword']
+
+    updateQuery = '''UPDATE password_info SET website = ?, username = ?, password = ? WHERE password_id = ?'''
+
+    c.execute(updateQuery, (website, username, password, password_id))
+    conn.commit()
+    conn.close()
+
+
 @app.route('/deletePassword', methods=['POST'])
 def deletePassword():
     conn = sqlite3.connect('identifier.sqlite')

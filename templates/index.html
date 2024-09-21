@@ -50,7 +50,30 @@
                         <label for="password">Password:</label>
                         <input type="password" id="password" required>
                     </div>
+                    <button id="registerPasswordBtn" type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="editPasswordModal" class="modal">
+            <div class="modal-content">
+                <span id="closeEditPasswordModal" class="close">&times;</span>
+                <h2>Edit Password</h2>
+                <form id="editPasswordForm">
+                    <div class="form-group">
+                        <label for="website">Website:</label>
+                        <input type="text" id="editWebsite">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="editUsername">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="editPassword">
+                    </div>
                     <button id="savePasswordBtn" type="submit" class="btn btn-primary">Save</button>
+                    <button id="cancelEditPasswordBtn" type="submit" class="btn">Cancel</button>
                 </form>
             </div>
         </div>
@@ -62,7 +85,7 @@
                 <p>Are you sure you want to delete this password?</p>
                 <br>
                 <button id="confirmDeletePasswordBtn" style="background-color: #e74c3c;" class="btn btn-primary">Delete</button>
-                <button id="cancelDeletePasswordBtn" class="btn btn-primary">Cancel</button>
+                <button id="cancelDeletePasswordBtn" class="btn">Cancel</button>
             </div>
         </div>
 
