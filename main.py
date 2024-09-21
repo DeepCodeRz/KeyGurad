@@ -59,6 +59,7 @@ def addNewPassword():
     c.execute(id_query)
 
     password_id = c.fetchone()[0]
+    conn.close()
 
     return jsonify({'password_id': password_id})
 
@@ -71,7 +72,13 @@ def deletePassword():
     password_id = data.get('password_id')
 
     delete_query = '''DELETE FROM password_info WHERE password_id = ?'''
+
     c.execute(delete_query, (password_id,))
+    conn.commit()
+
+    conn.close()
+
+    return jsonify({'password deleted': True})
 
 # Getting needed options data via JavaScript to create the passwords with right criteria.
 @app.route('/options', methods=['POST'])

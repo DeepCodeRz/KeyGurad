@@ -31,8 +31,9 @@ savePasswordBtn.addEventListener("click", function(event) {
         .then(data => {
             password_id = data["password_id"]
             const newPassword = document.createElement("div");
+            newPassword.id = `${password_id}-password-item`
 
-            newPassword.className = "password-item";
+            newPassword.className = `password-item`;
             newPassword.innerHTML = `<div>
                                  <strong>Website:</strong>
                                  <span style="color: var(--secondary-text-color);">${website}</span>
@@ -53,6 +54,7 @@ savePasswordBtn.addEventListener("click", function(event) {
 
             passwordList.appendChild(newPassword);
 
+            const passwordCard = document.getElementById(`${password_id}-password-item`);
             const visibilityBtn = document.getElementById(`visibility-${password_id}`);
             const copyBtn = document.getElementById(`copy-${password_id}`);
             const deleteBtn = document.getElementById(`delete-${password_id}`);
@@ -95,8 +97,10 @@ savePasswordBtn.addEventListener("click", function(event) {
                     fetch('/deletePassword', {
                         method: 'POST',
                         headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({password_id})
+                        body: JSON.stringify({password_id: password_id})
                     })
+
+                    passwordCard.remove()
 
                     deletePasswordModal.style.display = "none";
                 })
