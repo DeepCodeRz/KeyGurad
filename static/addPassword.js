@@ -214,9 +214,8 @@ registerPasswordBtn.addEventListener("click", function(event) {
         addPasswordModal.getElementsByClassName("btn")[0].style.display = "block";
         addPasswordModal.getElementsByClassName("close")[0].style.display = "block";
     }, 2000)
+})
 
-
-    closeAddPasswordModal.addEventListener("click", function () {
-        addPasswordModal.style.display = "none";
-    })
+closeAddPasswordModal.addEventListener("click", function () {
+    addPasswordModal.style.display = "none";
 })
