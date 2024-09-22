@@ -10,6 +10,7 @@ const closeEditPasswordModal = document.getElementById("closeEditPasswordModal")
 const deletePasswordModal = document.getElementById("deletePasswordModal");
 const confirmDeletePassword = document.getElementById("confirmDeletePasswordBtn");
 const cancelDeletePassword = document.getElementById("cancelDeletePasswordBtn");
+const passwordDeletedImg = document.getElementById("passwordDeletedImg");
 const closeDeletePasswordModal = document.getElementById("closeAddPasswordModal");
 let password_id;
 
@@ -117,8 +118,17 @@ registerPasswordBtn.addEventListener("click", function(event) {
                         body: JSON.stringify({password_id: password_id, editedWebsite: editedWebsite.value, editedUsername: editedUsername.value, editedPassword: editedPassword.value})
                     }).catch(function(error) {console.log(error)})
 
+                    passwordSavedImg.style.display = 'block'
 
-                    editPasswordModal.style.display = 'none'
+                    editPasswordModal.getElementsByTagName("h2")[0].style.display = "none";
+                    editPasswordModal.getElementsByClassName("close")[0].style.display = "none";
+                    editPasswordModal.getElementsByClassName("btn")[0].style.display = "none";
+                    editPasswordModal.getElementsByClassName("btn")[1].style.display = "none";
+                    editPasswordModal.getElementsByTagName("form")[0].style.display = "none";
+
+                    setTimeout(function() {
+                        editPasswordModal.style.display = 'none'
+                    }, 2000)
                 })
 
                 editPasswordModal.style.display = 'block';
@@ -146,8 +156,18 @@ registerPasswordBtn.addEventListener("click", function(event) {
                     }).catch(function(error) {console.log(error)})
 
                     passwordCard.remove()
+                    passwordDeletedImg.style.display = 'block'
 
-                    deletePasswordModal.style.display = "none";
+                    deletePasswordModal.getElementsByTagName("h2")[0].style.display = "none";
+                    deletePasswordModal.getElementsByClassName("close")[0].style.display = "none";
+                    deletePasswordModal.getElementsByClassName("btn")[0].style.display = "none";
+                    deletePasswordModal.getElementsByClassName("btn")[1].style.display = "none";
+                    deletePasswordModal.getElementsByTagName("p")[0].style.display = "none";
+                    deletePasswordModal.getElementsByTagName("br")[0].style.display = "none";
+
+                    setTimeout(function() {
+                        deletePasswordModal.style.display = 'none'
+                    }, 2000)
                 })
 
                 cancelDeletePassword.addEventListener("click", function() {

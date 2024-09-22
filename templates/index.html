@@ -57,19 +57,20 @@
 
         <div id="editPasswordModal" class="modal">
             <div class="modal-content">
+                <img id="passwordSavedImg" src="{{url_for('static', filename='passwordSavedImg.png')}}" style="display: none; height: 100%; width: 100%; border-radius: 8px">
                 <span id="closeEditPasswordModal" class="close">&times;</span>
                 <h2>Edit Password</h2>
                 <form id="editPasswordForm">
                     <div class="form-group">
-                        <label for="website">Website:</label>
+                        <label for="editWebsite">Website:</label>
                         <input type="text" id="editWebsite">
                     </div>
                     <div class="form-group">
-                        <label for="username">Username:</label>
+                        <label for="editUsername">Username:</label>
                         <input type="text" id="editUsername">
                     </div>
                     <div class="form-group">
-                        <label for="password">Password:</label>
+                        <label for="editPassword">Password:</label>
                         <input type="password" id="editPassword">
                     </div>
                     <button id="savePasswordBtn" type="submit" class="btn btn-primary">Save</button>
@@ -80,6 +81,7 @@
 
         <div id="deletePasswordModal" class="modal">
             <div class="modal-content">
+                <img id="passwordDeletedImg" src="{{url_for('static', filename='passwordDeletedImg.png')}}" style="display: none; height: 100%; width: 100%; border-radius: 8px">
                 <span id="closeDeletePasswordModal" class="close">&times;</span>
                 <h2>Delete Password</h2>
                 <p>Are you sure you want to delete this password?</p>
