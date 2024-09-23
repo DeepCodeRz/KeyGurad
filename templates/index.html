@@ -25,8 +25,10 @@
     </aside>
     <main class="main-content">
         <div id="passwords" class="tab-content active">
-            <input id="search" type="text">
-            <label for="search">Search password</label>
+            <div class="search-bar">
+                <input id="search" type="text" placeholder="Search password...">
+                <button class="btn btn-primary" onclick="searchPassword()">Search</button>
+            </div>
             <h2>My Passwords</h2>
             <div class="password-list">
             </div>
@@ -156,8 +158,8 @@
     </main>
 </div>
 
-<script src="{{ url_for('static', filename='addPassword.js')}}"></script>
-<script src="{{ url_for('static', filename='passwordActions.js')}}"></script>
+<script src="{{ url_for('static', filename='passwordHub.js')}}"></script>
+<script src="{{ url_for('static', filename='searchPassword.js')}}"></script>
 <script src="{{ url_for('static', filename='createPassword.js')}}"></script>
 <script src="{{ url_for('static', filename='securityCheck.js')}}"></script>
 <script src="{{ url_for('static', filename='tabs.js')}}"></script>

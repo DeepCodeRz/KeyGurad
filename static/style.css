@@ -91,6 +91,21 @@ h2 {
     color: var(--primary-color);
 }
 
+.search-bar {
+    display: flex;
+    position: absolute;
+    left: 75%;
+}
+
+#search {
+    width: 100%;
+}
+
+.search-bar button {
+    position: absolute;
+    margin-left: 210px;
+}
+
 .password-list {
     background-color: var(--header-color);
     border-radius: 8px;

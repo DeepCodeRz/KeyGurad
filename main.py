@@ -36,7 +36,6 @@ special_list = "!#$%&()*+-./:;<=>?"
 def home():
     return render_template('index.html')
 
-
 @app.route('/addNewPassword', methods=['POST'])
 def addNewPassword():
     conn = sqlite3.connect('identifier.sqlite')
@@ -80,7 +79,6 @@ def editPassword():
     conn.commit()
     conn.close()
 
-
 @app.route('/deletePassword', methods=['POST'])
 def deletePassword():
     conn = sqlite3.connect('identifier.sqlite')
@@ -97,6 +95,23 @@ def deletePassword():
     conn.close()
 
     return jsonify({'password deleted': True})
+
+@app.route('/searchPassword', methods=['GET'])
+def searchPassword():
+    conn = sqlite3.connect('identifier.sqlite')
+    c = conn.cursor()
+
+    getIdsQuery = '''SELECT password_id FROM password_info ORDER BY password_id DESC;'''
+
+    c.execute(getIdsQuery)
+    rows = c.fetchall()
+
+    ids = [item[0] for item in rows]
+
+    conn.close()
+
+    return jsonify({'passwords': ids})
+
 
 # Getting needed options data via JavaScript to create the passwords with right criteria.
 @app.route('/options', methods=['POST'])
