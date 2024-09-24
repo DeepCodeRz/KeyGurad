@@ -94,7 +94,7 @@ h2 {
 .search-bar {
     display: flex;
     position: absolute;
-    left: 75%;
+    left: 70rem;
 }
 
 #search {
@@ -271,4 +271,7 @@ input[type="number"] {
     .nav-links li {
         margin-bottom: 0;
     }
+}
+.display-none {
+    display: none;
 }

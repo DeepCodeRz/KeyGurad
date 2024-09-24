@@ -1,6 +1,12 @@
 function searchPassword() {
     let passwords;
 
+    const passwordItems = document.getElementsByClassName("password-item");
+
+    for (let i = 0; i < passwordItems.length; i++) {
+        passwordItems[i].classList.remove("display-none");
+    }
+
     fetch('searchPassword', {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
@@ -8,7 +14,7 @@ function searchPassword() {
         passwords = data["passwords"];
 
         let searchedPassword = document.getElementById("search").value;
-        let found = false; // Şifre bulunup bulunmadığını kontrol etmek için
+        let found = false;
 
         for (let password of passwords) {
             let passwordElement = document.getElementById(`website-${password}`);
@@ -16,11 +22,11 @@ function searchPassword() {
             if (passwordElement) {
                 let passwordItem = passwordElement.innerText;
 
-                if (passwordItem === searchedPassword) {
-                    passwordElement.parentElement.parentElement.style.display = "block";
+                if (passwordItem.includes(searchedPassword)) {
                     found = true;
                 } else {
-                    passwordElement.parentElement.parentElement.display = "none"; // Diğer şifreleri gizlemek için
+                    console.log(1)
+                    document.getElementById(`${password}-password-item`).classList.add('display-none')
                 }
             }
         }
