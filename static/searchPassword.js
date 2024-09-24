@@ -5,30 +5,30 @@ function searchPassword() {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
     }).then(res => res.json()).then(data => {
-        passwords = data["passwords"]
+        passwords = data["passwords"];
 
-        searchedPassword = document.getElementById("search").value;
+        let searchedPassword = document.getElementById("search").value;
+        let found = false; // Şifre bulunup bulunmadığını kontrol etmek için
 
-        // HAVE TO FIX
-        for (i in document.getElementsByClassName('password-item')) {
-            document.getElementsByClassName('password-item')[i].style.display = "none";
-        }
-        // HAVE TO FIX
+        for (let password of passwords) {
+            let passwordElement = document.getElementById(`website-${password}`);
 
-        let passwordItem;
-        for (i in passwords) {
-            console.log(passwords[i]);
-            if (document.getElementById(`website-${passwords[i]}`).innerText === null) {
-                alert("Password couldn't find!");
-            } else {
-                passwordItem = document.getElementById(`website-${passwords[i]}`).innerText;
+            if (passwordElement) {
+                let passwordItem = passwordElement.innerText;
 
                 if (passwordItem === searchedPassword) {
-                    alert("Password found!");
+                    passwordElement.parentElement.parentElement.style.display = "block";
+                    found = true;
                 } else {
-                    alert("Password couldn't find!");
+                    passwordElement.parentElement.parentElement.display = "none"; // Diğer şifreleri gizlemek için
                 }
             }
-            }
-    })
+        }
+
+        if (!found) {
+            alert("Password couldn't be found!");
+        }
+    }).catch(err => {
+        console.error('Error fetching passwords:', err);
+    });
 }
