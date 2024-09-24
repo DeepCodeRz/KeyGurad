@@ -56,8 +56,15 @@ function generatePassword() {
 generatePassword()
 
 function copy() {
+    const copy = document.getElementById('copy');
     const password = document.getElementById('generated-password').value;
     console.log(password)
+
+    copy.innerHTML = `<i class="ri-check-line"></i>`;
+
+    setTimeout(function() {
+        copy.innerHTML = `<i class="ri-clipboard-line"></i>`;
+    }, 2000);
 
     navigator.clipboard.writeText(password);
 }
@@ -66,11 +73,11 @@ function showHide(){
     const showHideBtn = document.getElementById('showHide')
     const password = document.getElementById('generated-password')
 
-    if (showHideBtn.innerHTML === 'Show password') {
+    if (showHideBtn.innerHTML === `<i class="ri-eye-line"></i>`) {
         password.classList.remove('hidden');
-        showHideBtn.innerHTML = 'Hide password'
+        showHideBtn.innerHTML = `<i class="ri-eye-off-line"></i>`
     } else {
         password.classList.add('hidden');
-        showHideBtn.innerHTML = 'Show password'
+        showHideBtn.innerHTML = `<i class="ri-eye-line"></i>`
     }
 }
