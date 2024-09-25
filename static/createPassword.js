@@ -58,7 +58,6 @@ generatePassword()
 function copy() {
     const copy = document.getElementById('copy');
     const password = document.getElementById('generated-password').value;
-    console.log(password)
 
     copy.innerHTML = `<i class="ri-check-line"></i>`;
 

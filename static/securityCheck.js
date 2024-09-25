@@ -1,26 +1,78 @@
-const passwordToAnalyze = document.getElementById("password-to-analyze")
 const analyzeBtn = document.getElementById("analyzeBtn")
+const strengthMeter = document.getElementsByClassName("strength-meter-fill")[0]
+const strengthText = document.getElementById("strength-text")
 
 analyzeBtn.addEventListener("click", function(event) {
     event.preventDefault()
+
+    const passwordToAnalyze = document.getElementById("password-to-analyze").value
 
     let securityScore = 0
 
     let containsUpper = /[A-Z]/.test(passwordToAnalyze);
     let containsLower = /[a-z]/.test(passwordToAnalyze);
-    let containsNum = /[0-9]/.test(passwordToAnalyze);
+    let containsNum = /\d/.test(passwordToAnalyze);
+    let containsSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(passwordToAnalyze);
+    let checkLength = passwordToAnalyze.length;
+    let checkCommonPassword = true
 
-    if (containsUpper) {
-        securityScore += 1;
-    }
+    fetch('/checkCommonPassword', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({passwordToAnalyze})
+    }).then(res => res.json()).then((data) => {
+        if (data["true"]) {
+            console.log(data);
+            checkCommonPassword = true
+        } else {
+            checkCommonPassword = false
+        }
 
-    if (containsLower) {
-        securityScore += 1;
-    }
+        if (containsUpper) {
+            securityScore += 1;
+        }
 
-    if (containsNum) {
-        securityScore += 1;
-    }
+        if (containsLower) {
+            securityScore += 1;
+        }
 
-    console.log(securityScore);
+        if (containsNum) {
+            securityScore += 1;
+        }
+
+        if (containsSpecial) {
+            securityScore += 1;
+        }
+
+        if (checkLength >= 12) {
+            securityScore += 1;
+        }
+
+        if (checkCommonPassword === false) {
+            securityScore += 1;
+        }
+
+        function updateStrengthMeter(strength, width, text) {
+            strengthMeter.classList.remove('weak', 'medium', 'strong');
+            strengthMeter.classList.add(strength);
+            strengthMeter.style.width = width;
+            strengthText.innerText = text;
+        }
+
+        if (securityScore === 1) {
+            updateStrengthMeter('weak', '20%', 'Too Weak');
+        } else if (securityScore === 2) {
+            updateStrengthMeter('weak', '30%', 'Weak');
+        } else if (securityScore === 3 ) {
+            updateStrengthMeter('medium', '40%', 'Medium');
+        } else if (securityScore === 4) {
+            updateStrengthMeter('medium', '60%', 'Medium');
+        } else if (securityScore === 5) {
+            updateStrengthMeter('strong', '80%', 'Strong');
+        } else if (securityScore === 6) {
+            updateStrengthMeter('strong', '100%', 'Strong');
+        }
+
+
+    })
 })

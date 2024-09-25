@@ -1,3 +1,5 @@
+from sqlite3 import connect
+
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 import random
 import sqlite3
@@ -295,7 +297,29 @@ def options():
 
     return jsonify({'password': password}) # Password will be sent to Front-End.
 
+@app.route('/checkCommonPassword', methods=['POST'])
+def checkCommonPassword():
+    data = request.get_json()
+    passwordToAnalyze = data['passwordToAnalyze']
+
+    print(passwordToAnalyze)
+
+    conn = sqlite3.connect('identifier.sqlite')
+    c = conn.cursor()
+
+    getCommonQ = '''SELECT password FROM common_passwords;'''
+    c.execute(getCommonQ)
+
+    rows = c.fetchall()
+    conn.close()
+
+    isCommon = passwordToAnalyze in {item[0] for item in rows}
+
+    if isCommon:
+        return jsonify({'true': "true"})
+    else:
+        return jsonify({'false': "false"})
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5002)
+    app.run(debug=True, port=5001)
