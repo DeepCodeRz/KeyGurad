@@ -21,34 +21,26 @@ analyzeBtn.addEventListener("click", function(event) {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({passwordToAnalyze})
     }).then(res => res.json()).then((data) => {
+
         if (data["true"]) {
-            console.log(data);
             checkCommonPassword = true
         } else {
             checkCommonPassword = false
-        }
-
-        if (containsUpper) {
             securityScore += 1;
         }
 
-        if (containsLower) {
-            securityScore += 1;
+        function checkCriteria(criteria) {
+            if (criteria) {
+                securityScore += 1;
+            }
         }
 
-        if (containsNum) {
-            securityScore += 1;
-        }
-
-        if (containsSpecial) {
-            securityScore += 1;
-        }
+        checkCriteria(containsUpper)
+        checkCriteria(containsLower)
+        checkCriteria(containsNum)
+        checkCriteria(containsSpecial)
 
         if (checkLength >= 12) {
-            securityScore += 1;
-        }
-
-        if (checkCommonPassword === false) {
             securityScore += 1;
         }
 
@@ -60,7 +52,7 @@ analyzeBtn.addEventListener("click", function(event) {
         }
 
         if (securityScore === 1) {
-            updateStrengthMeter('weak', '20%', 'Too Weak');
+            updateStrengthMeter('weak', '15%', 'Too Weak');
         } else if (securityScore === 2) {
             updateStrengthMeter('weak', '30%', 'Weak');
         } else if (securityScore === 3 ) {
