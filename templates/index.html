@@ -100,7 +100,7 @@
             <h2>Secure Password Generator</h2>
             <div class="form-group">
                 <label for="length" typeof="text" class="first-label">Length:</label>
-                <input type="range" id="length" name="length" min="8" max="20" oninput="this.nextElementSibling.value = this.value">
+                <input type="range" id="length" name="length" min="8" max="20" style="accent-color: #2980b9;" oninput="this.nextElementSibling.value = this.value">
                 <output>14</output>
             </div>
 
@@ -139,7 +139,7 @@
                     <label for="password-to-analyze">Password to Analyze:</label>
                     <input type="password" id="password-to-analyze" placeholder="Enter your password">
                 </div>
-                <button type="submit" class="btn btn-primary">Analyze</button>
+                <button id="analyzeBtn" type="submit" class="btn btn-primary">Analyze</button>
             </form>
 
             <div class="password-strength">

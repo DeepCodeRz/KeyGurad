@@ -55,6 +55,7 @@ registerPasswordBtn.addEventListener("click", function(event) {
                                 <button id="visibility-${password_id}" class="btn btn-icon" aria-label="Show/Hide Password"><i class="ri-eye-line"></i></button>
                                 <button id="copy-${password_id}" class="btn btn-icon" aria-label="Copy Password"><i class="ri-clipboard-line"></i></button>
                                 <button id="edit-${password_id}" class="btn btn-icon" aria-label="Edit Password"><i class="ri-edit-line"></i></button>
+                                <button id="analyze-${password_id}" class="btn btn-icon" aria-label="Analyze Password"><i class="ri-line-chart-line"></i></button>
                                 <button id="delete-${password_id}" class="btn btn-icon" aria-label="Delete Password"><i class="ri-delete-bin-line"></i></button>
                              </div>`;
 
