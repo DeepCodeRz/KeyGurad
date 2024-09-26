@@ -28,6 +28,8 @@ analyzeBtn.addEventListener("click", function(event) {
 
         if (data["true"]) {
             checkCommonPassword = true
+            criteria4.innerHTML = `<li id="criteria4"><i style="top: 3px; position: relative;" class="ri-close-line">
+                                   </i>  Avoid easy-to-guess words or sequences.</li>`
         } else {
             checkCommonPassword = false
             securityScore += 1;
@@ -41,26 +43,26 @@ analyzeBtn.addEventListener("click", function(event) {
             }
         }
 
+        function changeIcon(criteria, criteriaNum, text) {
+            if (criteria){
+                criteriaNum.innerHTML = `<li id="${criteriaNum}"><i style="top: 3px; position: relative;" class="ri-check-line">
+                                   </i>  ${text}</li>`
+            } else {
+                criteriaNum.innerHTML = `<li id="${criteriaNum}"><i style="top: 3px; position: relative;" class="ri-close-line">
+                                   </i>  ${text}</li>`
+            }
+
+        }
+
         checkCriteria(checkLength);
         checkCriteria(containsUpper)
         checkCriteria(containsLower)
         checkCriteria(containsNum)
         checkCriteria(containsSpecial)
 
-        if (containsUpper && containsLower) {
-            criteria2.innerHTML = `<li id="criteria2"><i style="top: 3px; position: relative;" class="ri-check-line">
-                                   </i>  Use both uppercase and lowercase letters.</li>`
-        }
-
-        if (containsNum && containsSpecial) {
-            criteria3.innerHTML = `<li id="criteria3"><i style="top: 3px; position: relative;" class="ri-check-line">
-                                   </i>  Include numbers and special characters.</li>`
-        }
-
-        if (containsNum && containsSpecial) {
-            criteria3.innerHTML = `<li id="criteria3"><i style="top: 3px; position: relative;" class="ri-check-line">
-                                   </i>  Include numbers and special characters.</li>`
-        }
+        changeIcon(checkLength, criteria1, 'Your password should be at least 12 characters long.');
+        changeIcon((containsUpper && containsLower), criteria2, 'Use both uppercase and lowercase letters.');
+        changeIcon((containsNum && containsSpecial), criteria3, 'Include numbers and special characters.');
 
         function updateStrengthMeter(strength, width, text) {
             strengthMeter.classList.remove('weak', 'medium', 'strong');
