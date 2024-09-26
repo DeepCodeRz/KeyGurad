@@ -2,18 +2,22 @@ const analyzeBtn = document.getElementById("analyzeBtn")
 const strengthMeter = document.getElementsByClassName("strength-meter-fill")[0]
 const strengthText = document.getElementById("strength-text")
 
+const criteria1 = document.getElementById("criteria1")
+const criteria2 = document.getElementById("criteria2")
+const criteria3 = document.getElementById("criteria3")
+const criteria4 = document.getElementById("criteria4")
+
 analyzeBtn.addEventListener("click", function(event) {
     event.preventDefault()
 
     const passwordToAnalyze = document.getElementById("password-to-analyze").value
-
     let securityScore = 0
 
+    let checkLength = passwordToAnalyze.length >= 12;
     let containsUpper = /[A-Z]/.test(passwordToAnalyze);
     let containsLower = /[a-z]/.test(passwordToAnalyze);
     let containsNum = /\d/.test(passwordToAnalyze);
     let containsSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(passwordToAnalyze);
-    let checkLength = passwordToAnalyze.length;
     let checkCommonPassword = true
 
     fetch('/checkCommonPassword', {
@@ -27,6 +31,8 @@ analyzeBtn.addEventListener("click", function(event) {
         } else {
             checkCommonPassword = false
             securityScore += 1;
+            criteria4.innerHTML = `<li id="criteria4"><i style="top: 3px; position: relative;" class="ri-check-line">
+                                   </i>  Avoid easy-to-guess words or sequences.</li>`
         }
 
         function checkCriteria(criteria) {
@@ -35,13 +41,25 @@ analyzeBtn.addEventListener("click", function(event) {
             }
         }
 
+        checkCriteria(checkLength);
         checkCriteria(containsUpper)
         checkCriteria(containsLower)
         checkCriteria(containsNum)
         checkCriteria(containsSpecial)
 
-        if (checkLength >= 12) {
-            securityScore += 1;
+        if (containsUpper && containsLower) {
+            criteria2.innerHTML = `<li id="criteria2"><i style="top: 3px; position: relative;" class="ri-check-line">
+                                   </i>  Use both uppercase and lowercase letters.</li>`
+        }
+
+        if (containsNum && containsSpecial) {
+            criteria3.innerHTML = `<li id="criteria3"><i style="top: 3px; position: relative;" class="ri-check-line">
+                                   </i>  Include numbers and special characters.</li>`
+        }
+
+        if (containsNum && containsSpecial) {
+            criteria3.innerHTML = `<li id="criteria3"><i style="top: 3px; position: relative;" class="ri-check-line">
+                                   </i>  Include numbers and special characters.</li>`
         }
 
         function updateStrengthMeter(strength, width, text) {

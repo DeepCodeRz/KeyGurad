@@ -18,9 +18,7 @@
         <ul class="nav-links">
             <li><a href="#passwords" class="active"><i class="ri-key-2-line"></i> Passwords</a></li>
             <li><a href="#generator"><i class="ri-add-circle-line"></i> Password Generator</a></li>
-            <li><a href="#analyzer"><i class="ri-shield-check-line"></i> Password Analysis</a></li>
-            <li><a href="#analyzer"><i class="ri-links-line"></i> Browser Extension</a></li>
-            <li><a href="#analyzer"><i class="ri-settings-3-line"></i> Settings</a></li>
+            <li><a id="analysisNavLink" href="#analyzer"><i class="ri-shield-check-line"></i> Password Analysis</a></li>
         </ul>
     </aside>
     <main class="main-content">
@@ -125,7 +123,8 @@
                 <label for="generated-password" class="first-label">Generated Password:</label>
                 <input class="hidden" type="text" id="generated-password" readonly>
                 <div class="result">
-                    <button class="btn" id="analyzeSec" onclick="showHide()"><i class="ri-line-chart-line"></i></button>
+                    <button class="btn" id="registerCreatedPassword">Register this password</button>
+                    <button class="btn" id="analyzeSec" onclick="analyzePassword()"><i class="ri-line-chart-line"></i></button>
                     <button class="btn" id="copy" onclick="copy()"><i class="ri-clipboard-line"></i></button>
                     <button class="btn" id="showHide" onclick="showHide()"><i class="ri-eye-line"></i></button>
                 </div>
@@ -147,11 +146,11 @@
                 <div class="strength-meter">
                     <div class="strength-meter-fill medium" style="width: 60%;"></div>
                 </div>
-                <ul style="margin-top: 1rem; color: var(--secondary-text-color);">
-                    <li>Your password should be at least 12 characters long.</li>
-                    <li>Use both uppercase and lowercase letters.</li>
-                    <li>Include numbers and special characters.</li>
-                    <li>Avoid easy-to-guess words or sequences.</li>
+                <ul style="margin-top: 1rem; list-style-type: none; color: var(--secondary-text-color);">
+                    <li id="criteria1"><i style="top: 3px; position: relative;" class="ri-close-line"></i>  Your password should be at least 12 characters long.</li>
+                    <li id="criteria2"><i style="top: 3px; position: relative;" class="ri-close-line"></i>  Use both uppercase and lowercase letters.</li>
+                    <li id="criteria3"><i style="top: 3px; position: relative;" class="ri-close-line"></i>  Include numbers and special characters.</li>
+                    <li id="criteria4"><i style="top: 3px; position: relative;" class="ri-close-line"></i>  Avoid easy-to-guess words or sequences.</li>
                 </ul>
             </div>
         </div>

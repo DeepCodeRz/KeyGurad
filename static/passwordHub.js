@@ -16,12 +16,7 @@ const passwordDeletedImg = document.getElementById("passwordDeletedImg");
 const closeDeletePasswordModal = document.getElementById("closeDeletePasswordModal");
 let password_id;
 
-
-addPasswordBtn.addEventListener("click", function() {
-    addPasswordModal.style.display = "block";
-})
-
-registerPasswordBtn.addEventListener("click", function(event) {
+function registering(event) {
     event.preventDefault()
 
     const website = document.getElementById("website").value;
@@ -104,6 +99,7 @@ registerPasswordBtn.addEventListener("click", function(event) {
                 const editedUsername = document.getElementById('editUsername')
                 const editedPassword = document.getElementById('editPassword')
 
+                editedWebsite.value = website;
                 editedWebsite.value = website;
                 editedUsername.value = username;
                 editedPassword.value = password;
@@ -215,7 +211,15 @@ registerPasswordBtn.addEventListener("click", function(event) {
         addPasswordModal.getElementsByClassName("btn")[0].style.display = "block";
         addPasswordModal.getElementsByClassName("close")[0].style.display = "block";
     }, 2000)
+}
+
+
+addPasswordBtn.addEventListener("click", function() {
+    addPasswordModal.style.display = "block";
 })
+
+registerPasswordBtn.addEventListener("click", registering)
+
 
 closeAddPasswordModal.addEventListener("click", function () {
     addPasswordModal.style.display = "none";

@@ -7,5 +7,3 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         this.classList.add('active');
     });
 });
-
-

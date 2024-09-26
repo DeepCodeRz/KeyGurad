@@ -1,4 +1,5 @@
 let generateBtn = document.getElementById('generateBtn');
+let generatedPassword = document.getElementById("generated-password");
 
 function generatePassword() {
     generateBtn.addEventListener('click', function () {
@@ -9,8 +10,8 @@ function generatePassword() {
         const special = document.getElementById('special').checked;
         const keyword = document.getElementById('keyword').value;
 
-        document.getElementById('generated-password').classList.add('hidden');
-        document.getElementById('showHide').innerHTML = 'Show password'
+        generatedPassword.classList.add('hidden');
+        document.getElementById('showHide').innerHTML = `<i class="ri-eye-line"></i>`
 
         if (keyword.length < length) {
             if ((uppercase === true || lowercase === true || numbers === true || special === true)) {
@@ -33,7 +34,7 @@ function generatePassword() {
                         const data = await response.json();
                         if (data.password) {
                             await new Promise(resolve => setTimeout(resolve, 500));
-                            document.getElementById('generated-password').value = data.password;
+                            generatedPassword.value = data.password;
                         } else if (data.error1) {
                             alert(data.error1);
                         }
@@ -55,9 +56,27 @@ function generatePassword() {
 
 generatePassword()
 
+const registerCreatedPasswordBtn = document.getElementById('registerCreatedPassword')
+
+registerCreatedPasswordBtn.addEventListener("click", function() {
+    addPasswordModal.style.display = "block";
+    document.getElementById("password").value = generatedPassword.value;
+})
+
+function analyzePassword() {
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('analyzer').classList.add('active');
+    document.getElementById('analysisNavLink').classList.add('active');
+
+    document.getElementById('password-to-analyze').value = generatedPassword.value;
+    analyzeBtn.click()
+}
+
+
 function copy() {
     const copy = document.getElementById('copy');
-    const password = document.getElementById('generated-password').value;
+    const password = generatedPassword.value;
 
     copy.innerHTML = `<i class="ri-check-line"></i>`;
 
@@ -70,13 +89,12 @@ function copy() {
 
 function showHide(){
     const showHideBtn = document.getElementById('showHide')
-    const password = document.getElementById('generated-password')
 
     if (showHideBtn.innerHTML === `<i class="ri-eye-line"></i>`) {
-        password.classList.remove('hidden');
+        generatedPassword.classList.remove('hidden');
         showHideBtn.innerHTML = `<i class="ri-eye-off-line"></i>`
     } else {
-        password.classList.add('hidden');
+        generatedPassword.classList.add('hidden');
         showHideBtn.innerHTML = `<i class="ri-eye-line"></i>`
     }
 }
