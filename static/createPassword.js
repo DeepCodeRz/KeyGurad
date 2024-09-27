@@ -63,16 +63,15 @@ registerCreatedPasswordBtn.addEventListener("click", function() {
     document.getElementById("password").value = generatedPassword.value;
 })
 
-function analyzePassword() {
+function analyzePassword(password) {
     document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
     document.getElementById('analyzer').classList.add('active');
     document.getElementById('analysisNavLink').classList.add('active');
 
-    document.getElementById('password-to-analyze').value = generatedPassword.value;
+    document.getElementById('password-to-analyze').value = password;
     analyzeBtn.click()
 }
-
 
 function copy() {
     const copy = document.getElementById('copy');

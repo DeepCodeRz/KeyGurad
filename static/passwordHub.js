@@ -61,6 +61,7 @@ function registering(event) {
             const visibilityBtn = document.getElementById(`visibility-${password_id}`);
             const copyBtn = document.getElementById(`copy-${password_id}`);
             const editBtn = document.getElementById(`edit-${password_id}`);
+            const analyzeBtn = document.getElementById(`analyze-${password_id}`);
             const deleteBtn = document.getElementById(`delete-${password_id}`);
 
             const websiteSpan = document.getElementById(`website-${password_id}`);
@@ -94,15 +95,42 @@ function registering(event) {
 
             })
 
-            editBtn.addEventListener("click", function() {
-                const editedWebsite = document.getElementById('editWebsite')
-                const editedUsername = document.getElementById('editUsername')
-                const editedPassword = document.getElementById('editPassword')
+            analyzeBtn.addEventListener("click", function() {
+                if (passwordSpan.classList.contains('hidden')) {
+                    passwordSpan.classList.remove('hidden')
+                    analyzePassword(passwordSpan.innerText)
+                    passwordSpan.classList.add('hidden')
+                } else {
+                    analyzePassword(passwordSpan.innerText)
+                }
 
-                editedWebsite.value = website;
-                editedWebsite.value = website;
-                editedUsername.value = username;
-                editedPassword.value = password;
+            })
+
+            editBtn.addEventListener("click", function() {
+                let editedWebsite = document.getElementById('editWebsite')
+                let editedUsername = document.getElementById('editUsername')
+                let editedPassword = document.getElementById('editPassword')
+
+                function setEditModal() {
+                    const currentPassword = document.getElementById(`password-${password_id}`).innerText
+                    editedWebsite = document.getElementById('editWebsite')
+                    editedUsername = document.getElementById('editUsername')
+                    editedPassword = document.getElementById('editPassword')
+
+                    editedWebsite.value = websiteSpan.innerText;
+                    editedUsername.value = usernameSpan.innerText;
+                    editedPassword.value = currentPassword;
+                }
+
+                const websiteSpan = document.getElementById(`website-${password_id}`)
+                const usernameSpan = document.getElementById(`username-${password_id}`)
+                if (passwordSpan.classList.contains('hidden')) {
+                    passwordSpan.classList.remove('hidden')
+                    setEditModal()
+                    passwordSpan.classList.add('hidden')
+                } else {
+                    setEditModal()
+                }
 
                 savePasswordBtn.addEventListener("click", function(event) {
                     event.preventDefault()
