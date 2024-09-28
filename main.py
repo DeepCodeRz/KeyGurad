@@ -27,6 +27,10 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/startApp', methods=['POST', 'GET'])
+def startApp():
+    return render_template('app.html')
+
 # Resources of the password that will be created by randomly choosing.
 uppercase_list = "QWERTYUIOPASDFGHJKLZXCVBNM"
 lowercase_list = "qwertyuiopasdfghjklzxcvbnm"
@@ -36,7 +40,7 @@ special_list = "!#$%&()*+-./:;<=>?"
 # Rendering web template for Front-End.
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('app.html')
 
 @app.route('/addNewPassword', methods=['POST'])
 def addNewPassword():
@@ -322,4 +326,4 @@ def checkCommonPassword():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    app.run(debug=True, port=5005)

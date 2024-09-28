@@ -1,11 +1,13 @@
 :root {
-    --background-color: #2D2D2D;
-    --header-color: #3C3C3C;
-    --primary-color: #3498DB;
-    --secondary-color: #3C3C3C;
-    --text-color: #ECF0F1;
-    --secondary-text-color: #BDC3C7;
-    --border-color: #4A4A4A;
+    --background-color: #FFFFFF; /* White */
+    --header-color: #FFFFFF; /* White */
+    --primary-color: #020817; /* Very Dark Blue */
+    --secondary-color: #64748B; /* Grayish Blue */
+    --text-color: #020817; /* Very Dark Blue */
+    --secondary-text-color: #64748B; /* Grayish Blue */
+    --border-color: #E2E8F0; /* Light Grayish Blue */
+    --hover-background-color: #020817; /* Very Dark Blue */
+    --hover-text-color: #FFFFFF; /* White for hover states */
 }
 
 * {
@@ -61,12 +63,12 @@ body {
     align-items: center;
     padding: 0.5rem;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .nav-links a:hover, .nav-links a.active {
-    background-color: var(--primary-color);
-    color: var(--text-color);
+    background-color: var(--hover-background-color);
+    color: var(--hover-text-color); /* White text on hover */
 }
 
 .nav-links i {
@@ -140,16 +142,17 @@ h2 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .btn-primary {
     background-color: var(--primary-color);
-    color: var(--text-color);
+    color: var(--hover-text-color); /* White */
 }
 
 .btn-primary:hover {
-    background-color: #2980b9;
+    background-color: var(--hover-background-color); /* Darker Very Dark Blue */
+    color: var(--hover-text-color); /* White on hover */
 }
 
 .btn-secondary {
@@ -174,6 +177,7 @@ h2 {
 .form-group {
     margin-bottom: 1rem;
 }
+
 .first-label {
     color: var(--text-color);
     font-size: 16px;
@@ -183,10 +187,10 @@ h2 {
 
 #generator .form-group {
     width: 100%;
-    border-bottom: #2980b9 3px solid;
+    border: var(--border-color) 1px solid;
     padding: 10px;
     border-radius: 8px;
-    background-color: #3C3C3C;
+    background-color: var(--header-color);
     position: relative;
 }
 
@@ -204,7 +208,6 @@ h2 {
 .btn {
     margin-left: 5px;
 }
-
 
 .content-options {
     line-height: 1.2;
@@ -246,7 +249,7 @@ input[type="number"] {
 
 .weak { background-color: #e74c3c; }
 .medium { background-color: #f39c12; }
-.strong { background-color: #21944f; }
+.strong { background-color: #16A34A; /* Success (Green) */ }
 
 /* Modal styles */
 .modal {
@@ -258,7 +261,6 @@ input[type="number"] {
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.5);
-
 }
 
 .modal-content {

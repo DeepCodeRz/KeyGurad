@@ -1,0 +1,225 @@
+:root {
+    --dark-blue: #020817;
+    --white: #FFFFFF;
+    --gray: #4d4949;
+    --light-gray: #F8FAFC;
+    --success-green: #16A34A;
+    --border-color: #E2E8F0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--dark-blue);
+    background-color: var(--white);
+}
+
+a {
+    text-decoration: none;
+    color: var(--white);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background-color: var(--dark-blue);
+    color: var(--white);
+    padding: 20px 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--white);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+
+.nav-links a:hover::after {
+    transform: scaleX(1);
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button-outline {
+    background-color: transparent;
+    border: 1px solid var(--white);
+    color: var(--white);
+}
+
+.button-outline:hover {
+    background-color: var(--white);
+    color: var(--dark-blue);
+}
+
+.button-primary {
+    background-color: var(--dark-blue);
+    color: var(--white);
+}
+
+.button-primary:hover {
+    background-color: var(--gray);
+}
+
+main {
+    padding: 40px 0;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: var(--gray);
+    margin-bottom: 30px;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 sütun olacak şekilde düzenler */
+    gap: 30px;
+    margin-bottom: 60px;
+    justify-items: center; /* Kartları yatayda ortalar */
+    align-items: center;   /* Kartları dikeyde ortalar */
+    text-align: center;    /* Metinleri ortalar */
+}
+
+.feature-card {
+    background-color: var(--light-gray);
+    padding: 30px;
+    border: var(--border-color) 1px solid;
+    border-radius: 10px;
+    text-align: center;
+    width: 100%; /* Kartların genişliğini sütuna göre doldurur */
+    max-width: 250px; /* Genişliği sınırlar */
+}
+
+.feature-card h3 {
+    margin-top: 20px;
+}
+
+.pricing {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.price-card {
+    background-color: var(--light-gray);
+    padding: 30px;
+    border: var(--border-color) 1px solid;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.price-card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.price-card ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.price-card li {
+    margin-bottom: 10px;
+}
+
+.price-card li::before {
+    content: '✓';
+    color: var(--success-green);
+    margin-right: 10px;
+}
+
+.about-us {
+    background-color: var(--light-gray);
+    border: var(--border-color) 1px solid;
+    border-radius: 10px;
+    padding: 60px 0;
+    margin-bottom: 60px;
+}
+
+.about-us-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-us h2 {
+    margin-bottom: 30px;
+}
+
+.about-us p {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+footer {
+    background-color: var(--light-gray);
+    color: var(--gray);
+    text-align: center;
+    padding: 20px 0;
+}
