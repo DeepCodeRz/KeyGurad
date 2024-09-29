@@ -19,8 +19,6 @@
             <li><a href="#passwords" class="active"><i class="ri-key-2-line"></i> Passwords</a></li>
             <li><a href="#generator"><i class="ri-add-circle-line"></i> Password Generator</a></li>
             <li><a id="analysisNavLink" href="#analyzer"><i class="ri-shield-check-line"></i> Password Analysis</a></li>
-            <li><a id="analysisNavLink" href="#analyzer"><i class="ri-group-line"></i> Collaborations</a></li>
-            <li><a id="analysisNavLink" href="#analyzer"><i class="ri-settings-2-line"></i> Settings</a></li>
         </ul>
     </aside>
     <main class="main-content">
@@ -63,9 +61,9 @@
         <div id="editPasswordModal" class="modal">
             <div class="modal-content">
                 <img id="passwordSavedImg" src="{{url_for('static', filename='passwordSavedImg.png')}}" style="display: none; height: 100%; width: 100%; border-radius: 8px">
-                <span id="closeEditPasswordModal" class="close">&times;</span>
-                <h2>Edit Password</h2>
                 <form id="editPasswordForm">
+                    <h2>Edit Password</h2>
+                    <span id="closeEditPasswordModal" class="close">&times;</span>
                     <div class="form-group">
                         <label for="editWebsite">Website:</label>
                         <input type="text" id="editWebsite">
@@ -87,12 +85,14 @@
         <div id="deletePasswordModal" class="modal">
             <div class="modal-content">
                 <img id="passwordDeletedImg" src="{{url_for('static', filename='passwordDeletedImg.png')}}" style="display: none; height: 100%; width: 100%; border-radius: 8px">
-                <span id="closeDeletePasswordModal" class="close">&times;</span>
-                <h2>Delete Password</h2>
-                <p>Are you sure you want to delete this password?</p>
-                <br>
-                <button id="confirmDeletePasswordBtn" style="background-color: #e74c3c;" class="btn btn-primary">Delete</button>
-                <button id="cancelDeletePasswordBtn" class="btn">Cancel</button>
+                <form id="deletePasswordForm">
+                    <h2>Delete Password</h2>
+                    <span id="closeDeletePasswordModal" class="close">&times;</span>
+                    <p>Are you sure you want to delete this password?</p>
+                    <br>
+                    <button id="confirmDeletePasswordBtn" style="background-color: #e74c3c;" class="btn btn-primary">Delete</button>
+                    <button id="cancelDeletePasswordBtn" class="btn">Cancel</button>
+                </form>
             </div>
         </div>
 
@@ -100,7 +100,7 @@
             <h2>Secure Password Generator</h2>
             <div class="form-group">
                 <label for="length" typeof="text" class="first-label">Length:</label>
-                <input type="range" id="length" name="length" min="8" max="20" style="accent-color: #2980b9;" oninput="this.nextElementSibling.value = this.value">
+                <input type="range" id="length" name="length" min="8" max="20" style="accent-color: #020817;" oninput="this.nextElementSibling.value = this.value">
                 <output>14</output>
             </div>
 

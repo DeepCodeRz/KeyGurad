@@ -96,7 +96,7 @@ h2 {
 .search-bar {
     display: flex;
     position: absolute;
-    left: 70rem;
+    left: 78%;
 }
 
 #search {

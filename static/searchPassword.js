@@ -1,4 +1,5 @@
 function searchPassword() {
+    document.getElementById("search").placeholder = "Search password..";
     let passwords;
 
     const passwordItems = document.getElementsByClassName("password-item");
@@ -32,7 +33,10 @@ function searchPassword() {
         }
 
         if (!found) {
-            alert("Password couldn't be found!");
+            document.getElementById("search").value = "Password couldn't be found!";
+            for (let i = 0; i < passwordItems.length; i++) {
+                passwordItems[i].classList.remove("display-none");
+            }
         }
     }).catch(err => {
         console.error('Error fetching passwords:', err);

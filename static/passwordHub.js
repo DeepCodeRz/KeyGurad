@@ -146,20 +146,12 @@ function registering(event) {
                     }).catch(function(error) {console.log(error)})
 
                     passwordSavedImg.style.display = 'block'
-                    editPasswordModal.getElementsByTagName("h2")[0].style.display = "none";
-                    editPasswordModal.getElementsByClassName("close")[0].style.display = "none";
-                    editPasswordModal.getElementsByClassName("btn")[0].style.display = "none";
-                    editPasswordModal.getElementsByClassName("btn")[1].style.display = "none";
-                    editPasswordModal.getElementsByTagName("form")[0].style.display = "none";
+                    document.getElementById("editPasswordForm").style.display = 'none'
 
                     setTimeout(function() {
                         editPasswordModal.style.display = 'none'
                         passwordSavedImg.style.display = 'none'
-                        editPasswordModal.getElementsByTagName("h2")[0].style.display = "block";
-                        editPasswordModal.getElementsByClassName("close")[0].style.display = "block";
-                        editPasswordModal.getElementsByClassName("btn")[0].style.display = "block";
-                        editPasswordModal.getElementsByClassName("btn")[1].style.display = "block";
-                        editPasswordModal.getElementsByTagName("form")[0].style.display = "block";
+                        document.getElementById("editPasswordForm").style.display = 'block'
                     }, 2000)
                 })
 
@@ -176,9 +168,11 @@ function registering(event) {
             })
 
             deleteBtn.addEventListener("click", function() {
+
                 deletePasswordModal.style.display = "block";
 
-                confirmDeletePassword.addEventListener("click", function() {
+                confirmDeletePassword.addEventListener("click", function(event) {
+                    event.preventDefault()
 
                     console.log(password_id);
                     fetch('/deletePassword', {
@@ -190,26 +184,17 @@ function registering(event) {
                     passwordCard.remove()
 
                     passwordDeletedImg.style.display = 'block'
-                    deletePasswordModal.getElementsByTagName("h2")[0].style.display = "none";
-                    deletePasswordModal.getElementsByClassName("close")[0].style.display = "none";
-                    deletePasswordModal.getElementsByClassName("btn")[0].style.display = "none";
-                    deletePasswordModal.getElementsByClassName("btn")[1].style.display = "none";
-                    deletePasswordModal.getElementsByTagName("p")[0].style.display = "none";
-                    deletePasswordModal.getElementsByTagName("br")[0].style.display = "none";
+                    document.getElementById("deletePasswordForm").style.display = 'none'
 
                     setTimeout(function() {
                         deletePasswordModal.style.display = 'none'
                         passwordDeletedImg.style.display = 'none'
-                        deletePasswordModal.getElementsByTagName("h2")[0].style.display = "block";
-                        deletePasswordModal.getElementsByClassName("close")[0].style.display = "block";
-                        deletePasswordModal.getElementsByClassName("btn")[0].style.display = "block";
-                        deletePasswordModal.getElementsByClassName("btn")[1].style.display = "block";
-                        deletePasswordModal.getElementsByTagName("p")[0].style.display = "block";
-                        deletePasswordModal.getElementsByTagName("br")[0].style.display = "block";
+                        document.getElementById("deletePasswordForm").style.display = 'block'
                     }, 2000)
                 })
 
-                cancelDeletePassword.addEventListener("click", function() {
+                cancelDeletePassword.addEventListener("click", function(event) {
+                    event.preventDefault()
                     deletePasswordModal.style.display = "none";
                 })
 
