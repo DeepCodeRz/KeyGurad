@@ -34,6 +34,10 @@ function searchPassword() {
 
         if (!found) {
             document.getElementById("search").value = "Password couldn't be found!";
+
+            setTimeout(function() {
+                document.getElementById("search").value = "";
+            }, 2000)
             for (let i = 0; i < passwordItems.length; i++) {
                 passwordItems[i].classList.remove("display-none");
             }

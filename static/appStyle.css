@@ -230,6 +230,10 @@ input[type="number"] {
     color: var(--text-color);
 }
 
+input[type="checkbox"] {
+    accent-color: var(--primary-color);
+}
+
 .password-strength {
     margin-top: 1rem;
 }
