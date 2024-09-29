@@ -26,6 +26,7 @@ body {
 .dashboard {
     display: flex;
     min-height: 100vh;
+    flex-direction: row; /* Default direction for larger screens */
 }
 
 .sidebar {
@@ -78,6 +79,7 @@ body {
 .main-content {
     flex: 1;
     padding: 2rem;
+    overflow: auto; /* Allow scrolling in case of overflow */
 }
 
 .tab-content {
@@ -95,17 +97,18 @@ h2 {
 
 .search-bar {
     display: flex;
-    position: absolute;
-    left: 78%;
+    flex-direction: row; /* Row direction by default */
+    justify-content: space-between; /* Space between elements */
+    margin-bottom: 1rem; /* Margin for spacing */
 }
 
 #search {
-    width: 100%;
+    flex: 1; /* Make search input flexible */
+    padding: 0.5rem; /* Added padding for better usability */
 }
 
 .search-bar button {
-    position: absolute;
-    margin-left: 210px;
+    margin-left: 10px; /* Adjust margin */
 }
 
 .password-list {
@@ -294,7 +297,7 @@ input[type="checkbox"] {
 
 @media (max-width: 768px) {
     .dashboard {
-        flex-direction: column;
+        flex-direction: column; /* Change to column on smaller screens */
     }
 
     .sidebar {
@@ -312,7 +315,27 @@ input[type="checkbox"] {
     .nav-links li {
         margin-bottom: 0;
     }
+
+    .search-bar {
+        flex-direction: column; /* Stack search bar elements */
+        align-items: stretch; /* Make elements full width */
+    }
+
+    .search-bar button {
+        width: 100%; /* Full width button */
+        margin-left: 0; /* Remove left margin */
+        margin-top: 0.5rem; /* Space above button */
+    }
+
+    .main-content {
+        padding: 1rem; /* Reduced padding for smaller screens */
+    }
+
+    h2 {
+        font-size: 1.5rem; /* Adjust heading size */
+    }
 }
+
 .display-none {
     display: none;
 }
