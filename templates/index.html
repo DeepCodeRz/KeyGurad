@@ -12,13 +12,8 @@
         <div class="logo">KeyGuard</div>
         <div class="nav-links">
             <a href="#features">Features</a>
-            <a href="#pricing">Pricing</a>
             <a href="#about">About Us</a>
-            <a href="#contact">Contact</a>
-        </div>
-        <div class="auth-buttons">
-            <button class="button button-outline">Log In</button>
-            <button class="button button-outline">Sign Up</button>
+            <a href="https://www.linkedin.com/in/bedirhan-kurt-4884002a3/">Contact</a>
         </div>
     </nav>
 </header>
@@ -35,7 +30,7 @@
         <div class="features">
             <div class="feature-card">
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                <h3>Advanced Managing Options</h3>
+                <h3>Managing Options</h3>
                 <p>Use different functions and tags to manage them</p>
             </div>
             <div class="feature-card">
@@ -66,54 +61,11 @@
         </div>
     </section>
 
-    <section id="pricing">
-        <h2>Choose Your Plan</h2>
-        <div class="pricing">
-            <div class="price-card">
-                <h3>Basic</h3>
-                <div class="price">$4.99<span>/month</span></div>
-                <p>Perfect for personal use</p>
-                <ul>
-                    <li>Unlimited password storage</li>
-                    <li>Password generator</li>
-                    <li>Basic security analysis</li>
-                    <li>Mobile app access</li>
-                </ul>
-                <button class="button button-primary">Choose Plan</button>
-            </div>
-            <div class="price-card" style="border: 2px var(--dark-blue) solid">
-                <h3>Pro</h3>
-                <div class="price">$9.99<span>/month</span></div>
-                <p>Ideal for professionals</p>
-                <ul>
-                    <li>Everything in Basic</li>
-                    <li>Advanced security analysis</li>
-                    <li>Password sharing</li>
-                    <li>Priority support</li>
-                </ul>
-                <button class="button button-primary">Choose Plan</button>
-            </div>
-            <div class="price-card">
-                <h3>Team</h3>
-                <div class="price">$19.99<span>/month</span></div>
-                <p>Great for small teams</p>
-                <ul>
-                    <li>Everything in Pro</li>
-                    <li>Team password management</li>
-                    <li>Admin console</li>
-                    <li>API access</li>
-                </ul>
-                <button class="button button-primary">Choose Plan</button>
-            </div>
-        </div>
-    </section>
-
     <section id="about" class="about-us">
         <div class="about-us-content">
             <h2>About Us</h2>
-            <p>KeyGuard was founded with a simple mission: to make digital security accessible and manageable for everyone. Our team of cybersecurity experts and software engineers work tirelessly to provide you with the most secure and user-friendly password management solution.</p>
-            <p>We believe that strong security shouldn't come at the cost of convenience. That's why we've designed KeyGuard to be both powerful and easy to use, helping you stay safe online without the hassle.</p>
-            <p>With years of experience in the cybersecurity industry, we understand the evolving threats in the digital landscape. Our commitment to continuous innovation ensures that KeyGuard always stays one step ahead, providing you with cutting-edge protection for your digital identity.</p>
+            <p>This project, <strong>KeyGuard</strong>, was developed as part of a personal school project. It serves as a practical demonstration of password management systems, combining knowledge from cybersecurity and software engineering studies.
+                <br><br> The purpose of this project is to showcase the development of a secure and user-friendly solution for managing passwords while adhering to best practices in digital security. Created independently for educational purposes, it reflects skills in web development and security learned during coursework.</p>
             <button class="button button-primary">Learn More About Our Team</button>
         </div>
     </section>
@@ -124,20 +76,6 @@
 </footer>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const navLinks = document.querySelectorAll('.nav-links a');
-
-        navLinks.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                link.style.color = 'var(--gray)';
-            });
-
-            link.addEventListener('mouseleave', () => {
-                link.style.color = 'var(--white)';
-            });
-        });
-    });
-
     document.getElementById("getStartedBtn").addEventListener("click", function (){
         fetch('/startApp', {
             method: 'POST',

@@ -130,12 +130,12 @@ h1, h2 {
 
 .features {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 sütun olacak şekilde düzenler */
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     margin-bottom: 60px;
-    justify-items: center; /* Kartları yatayda ortalar */
-    align-items: center;   /* Kartları dikeyde ortalar */
-    text-align: center;    /* Metinleri ortalar */
+    justify-items: center;
+    align-items: center;
+    text-align: center;
 }
 
 .feature-card {
@@ -144,8 +144,8 @@ h1, h2 {
     border: var(--border-color) 1px solid;
     border-radius: 10px;
     text-align: center;
-    width: 100%; /* Kartların genişliğini sütuna göre doldurur */
-    max-width: 250px; /* Genişliği sınırlar */
+    width: 100%;
+    max-width: 250px;
 }
 
 .feature-card h3 {
