@@ -3,6 +3,8 @@
 
 KeyGuard is a web application that allows users to securely store, manage, and view their passwords for various websites. It also provides tools for creating strong passwords and assessing the security of existing passwords.
 
+
+
 ## Key Features
 
 - Password Functions
@@ -25,6 +27,7 @@ KeyGuard is a web application that allows users to securely store, manage, and v
   - Avoid easy-to-guess words or sequences.
 
 
+
 ## Technologies Used
 
 - HTML
@@ -32,6 +35,8 @@ KeyGuard is a web application that allows users to securely store, manage, and v
 - JavaScript
 - Python (Flask)
 - SQLite
+
+
 
 ## Installation
 
@@ -51,6 +56,7 @@ KeyGuard is a web application that allows users to securely store, manage, and v
    ```bash
    python app.py
    ```
+
 
 ## Note
 This project's front-end development has utilized artificial intelligence v0.dev.
