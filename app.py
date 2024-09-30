@@ -23,12 +23,15 @@ for row in rows:
 conn.close()"""
 app = Flask(__name__)
 
+user_id = ""
 @app.route('/')
 def index():
     return render_template('index.html')
 
 @app.route('/checkUser', methods=['POST', 'GET'])
 def checkUser():
+    global user_id
+    
     data = request.get_json()
     user_id = data['userId']
     password = data['password']
@@ -52,6 +55,15 @@ def checkUser():
 
 @app.route('/startApp', methods=['POST', 'GET'])
 def startApp():
+    conn = sqlite3.connect('identifier.sqlite')
+    c = conn.cursor()
+    print(user_id)
+
+    loadPasswordsQ = '''SELECT password FROM password_info WHERE user_id = ?'''
+
+    c.execute(loadPasswordsQ, (user_id,))
+    print(c.fetchall())
+
     return render_template('app.html')
 
 # Resources of the password that will be created by randomly choosing.
@@ -76,11 +88,11 @@ def addNewPassword():
     password = data['password']
 
     insert_query = '''
-    INSERT INTO password_info (website, username, password, previous_ver)
+    INSERT INTO password_info (user_id, website, username, password)
     VALUES (?, ?, ?, ?)
     '''
 
-    c.execute(insert_query, (website, username, password, None))
+    c.execute(insert_query, (user_id, website, username, password))
     conn.commit()
 
     id_query = '''SELECT password_id FROM password_info ORDER BY password_id DESC LIMIT 1;'''

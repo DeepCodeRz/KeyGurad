@@ -16,7 +16,7 @@ const passwordDeletedImg = document.getElementById("passwordDeletedImg");
 const closeDeletePasswordModal = document.getElementById("closeDeletePasswordModal");
 let password_id;
 
-function addNewPassword() {
+function addNewPassword(data, website, username, password) {
     password_id = data["password_id"]
     const newPassword = document.createElement("div");
     newPassword.id = `${password_id}-password-item`
@@ -208,7 +208,7 @@ function registering(event) {
         return response.json()
     })
         .then(data => {
-            addNewPassword()
+            addNewPassword(data, website, username, password)
         })
 
     document.getElementById("addPasswordForm").reset()
