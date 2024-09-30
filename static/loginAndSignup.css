@@ -1,0 +1,95 @@
+:root {
+    --dark-blue: #020817;
+    --white: #FFFFFF;
+    --gray: #64748B;
+    --light-gray: #F8FAFC;
+    --success-green: #16A34A;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--dark-blue);
+    background-color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: var(--light-gray);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-container {
+    padding: 40px;
+}
+
+h1 {
+    color: var(--dark-blue);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--dark-blue);
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.button {
+    background-color: var(--dark-blue);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: var(--gray);
+}
+
+.toggle-form {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.toggle-form a {
+    color: var(--dark-blue);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.toggle-form a:hover {
+    text-decoration: underline;
+}
+
+.logo {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--dark-blue);
+    margin-bottom: 20px;
+}
