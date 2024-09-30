@@ -16,27 +16,13 @@ const passwordDeletedImg = document.getElementById("passwordDeletedImg");
 const closeDeletePasswordModal = document.getElementById("closeDeletePasswordModal");
 let password_id;
 
-function registering(event) {
-    event.preventDefault()
+function addNewPassword() {
+    password_id = data["password_id"]
+    const newPassword = document.createElement("div");
+    newPassword.id = `${password_id}-password-item`
 
-    const website = document.getElementById("website").value;
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-
-    fetch('/addNewPassword', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({website, username, password})
-    }).then(response => {
-        return response.json()
-    })
-        .then(data => {
-            password_id = data["password_id"]
-            const newPassword = document.createElement("div");
-            newPassword.id = `${password_id}-password-item`
-
-            newPassword.className = `password-item`;
-            newPassword.innerHTML = `<div>
+    newPassword.className = `password-item`;
+    newPassword.innerHTML = `<div>
                                  <strong>Website:</strong>
                                  <span id="website-${password_id}" style="color: var(--secondary-text-color);">${website}</span>
                                  <br>
@@ -55,156 +41,174 @@ function registering(event) {
                              </div>`;
 
 
-            passwordList.appendChild(newPassword);
+    passwordList.appendChild(newPassword);
 
-            const passwordCard = document.getElementById(`${password_id}-password-item`);
-            const visibilityBtn = document.getElementById(`visibility-${password_id}`);
-            const copyBtn = document.getElementById(`copy-${password_id}`);
-            const editBtn = document.getElementById(`edit-${password_id}`);
-            const analyzeBtn = document.getElementById(`analyze-${password_id}`);
-            const deleteBtn = document.getElementById(`delete-${password_id}`);
+    const passwordCard = document.getElementById(`${password_id}-password-item`);
+    const visibilityBtn = document.getElementById(`visibility-${password_id}`);
+    const copyBtn = document.getElementById(`copy-${password_id}`);
+    const editBtn = document.getElementById(`edit-${password_id}`);
+    const analyzeBtn = document.getElementById(`analyze-${password_id}`);
+    const deleteBtn = document.getElementById(`delete-${password_id}`);
 
-            const websiteSpan = document.getElementById(`website-${password_id}`);
-            const usernameSpan = document.getElementById(`username-${password_id}`);
-            const passwordSpan = document.getElementById(`password-${password_id}`);
+    const websiteSpan = document.getElementById(`website-${password_id}`);
+    const usernameSpan = document.getElementById(`username-${password_id}`);
+    const passwordSpan = document.getElementById(`password-${password_id}`);
 
-            visibilityBtn.addEventListener("click", function() {
-                if (passwordSpan.classList.contains('hidden')) {
-                    visibilityBtn.innerHTML = `<i class="ri-eye-off-line"></i>`;
-                } else {
-                    visibilityBtn.innerHTML = `<i class="ri-eye-line"></i>`;
-                }
+    visibilityBtn.addEventListener("click", function() {
+        if (passwordSpan.classList.contains('hidden')) {
+            visibilityBtn.innerHTML = `<i class="ri-eye-off-line"></i>`;
+        } else {
+            visibilityBtn.innerHTML = `<i class="ri-eye-line"></i>`;
+        }
 
-                passwordSpan.classList.toggle('hidden')
-            })
+        passwordSpan.classList.toggle('hidden')
+    })
 
-            copyBtn.addEventListener("click", function() {
-                if (passwordSpan.classList.contains('hidden')) {
-                    passwordSpan.classList.remove('hidden')
-                    navigator.clipboard.writeText(passwordSpan.innerText);
-                    passwordSpan.classList.add('hidden')
-                } else {
-                    navigator.clipboard.writeText(passwordSpan.innerText);
-                }
+    copyBtn.addEventListener("click", function() {
+        if (passwordSpan.classList.contains('hidden')) {
+            passwordSpan.classList.remove('hidden')
+            navigator.clipboard.writeText(passwordSpan.innerText);
+            passwordSpan.classList.add('hidden')
+        } else {
+            navigator.clipboard.writeText(passwordSpan.innerText);
+        }
 
-                copyBtn.innerHTML = `<i class="ri-check-line"></i>`;
+        copyBtn.innerHTML = `<i class="ri-check-line"></i>`;
 
-                setTimeout(function() {
-                    copyBtn.innerHTML = `<i class="ri-clipboard-line"></i>`;
-                }, 2000);
+        setTimeout(function() {
+            copyBtn.innerHTML = `<i class="ri-clipboard-line"></i>`;
+        }, 2000);
 
-            })
+    })
 
-            analyzeBtn.addEventListener("click", function() {
-                if (passwordSpan.classList.contains('hidden')) {
-                    passwordSpan.classList.remove('hidden')
-                    analyzePassword(passwordSpan.innerText)
-                    passwordSpan.classList.add('hidden')
-                } else {
-                    analyzePassword(passwordSpan.innerText)
-                }
+    analyzeBtn.addEventListener("click", function() {
+        if (passwordSpan.classList.contains('hidden')) {
+            passwordSpan.classList.remove('hidden')
+            analyzePassword(passwordSpan.innerText)
+            passwordSpan.classList.add('hidden')
+        } else {
+            analyzePassword(passwordSpan.innerText)
+        }
 
-            })
+    })
 
-            editBtn.addEventListener("click", function() {
-                let editedWebsite = document.getElementById('editWebsite')
-                let editedUsername = document.getElementById('editUsername')
-                let editedPassword = document.getElementById('editPassword')
+    editBtn.addEventListener("click", function() {
+        let editedWebsite = document.getElementById('editWebsite')
+        let editedUsername = document.getElementById('editUsername')
+        let editedPassword = document.getElementById('editPassword')
 
-                function setEditModal() {
-                    const currentPassword = document.getElementById(`password-${password_id}`).innerText
-                    editedWebsite = document.getElementById('editWebsite')
-                    editedUsername = document.getElementById('editUsername')
-                    editedPassword = document.getElementById('editPassword')
+        function setEditModal() {
+            const currentPassword = document.getElementById(`password-${password_id}`).innerText
+            editedWebsite = document.getElementById('editWebsite')
+            editedUsername = document.getElementById('editUsername')
+            editedPassword = document.getElementById('editPassword')
 
-                    editedWebsite.value = websiteSpan.innerText;
-                    editedUsername.value = usernameSpan.innerText;
-                    editedPassword.value = currentPassword;
-                }
+            editedWebsite.value = websiteSpan.innerText;
+            editedUsername.value = usernameSpan.innerText;
+            editedPassword.value = currentPassword;
+        }
 
-                const websiteSpan = document.getElementById(`website-${password_id}`)
-                const usernameSpan = document.getElementById(`username-${password_id}`)
-                if (passwordSpan.classList.contains('hidden')) {
-                    passwordSpan.classList.remove('hidden')
-                    setEditModal()
-                    passwordSpan.classList.add('hidden')
-                } else {
-                    setEditModal()
-                }
+        const websiteSpan = document.getElementById(`website-${password_id}`)
+        const usernameSpan = document.getElementById(`username-${password_id}`)
+        if (passwordSpan.classList.contains('hidden')) {
+            passwordSpan.classList.remove('hidden')
+            setEditModal()
+            passwordSpan.classList.add('hidden')
+        } else {
+            setEditModal()
+        }
 
-                savePasswordBtn.addEventListener("click", function(event) {
-                    event.preventDefault()
+        savePasswordBtn.addEventListener("click", function(event) {
+            event.preventDefault()
 
-                    websiteSpan.innerText = editedWebsite.value
-                    usernameSpan.innerText = editedUsername.value
-                    passwordSpan.innerText = editedPassword.value
+            websiteSpan.innerText = editedWebsite.value
+            usernameSpan.innerText = editedUsername.value
+            passwordSpan.innerText = editedPassword.value
 
-                    fetch('editPassword', {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({password_id: password_id, editedWebsite: editedWebsite.value, editedUsername: editedUsername.value, editedPassword: editedPassword.value})
-                    }).catch(function(error) {console.log(error)})
+            fetch('editPassword', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({password_id: password_id, editedWebsite: editedWebsite.value, editedUsername: editedUsername.value, editedPassword: editedPassword.value})
+            }).catch(function(error) {console.log(error)})
 
-                    passwordSavedImg.style.display = 'block'
-                    document.getElementById("editPasswordForm").style.display = 'none'
+            passwordSavedImg.style.display = 'block'
+            document.getElementById("editPasswordForm").style.display = 'none'
 
-                    setTimeout(function() {
-                        editPasswordModal.style.display = 'none'
-                        passwordSavedImg.style.display = 'none'
-                        document.getElementById("editPasswordForm").style.display = 'block'
-                    }, 2000)
-                })
+            setTimeout(function() {
+                editPasswordModal.style.display = 'none'
+                passwordSavedImg.style.display = 'none'
+                document.getElementById("editPasswordForm").style.display = 'block'
+            }, 2000)
+        })
 
-                editPasswordModal.style.display = 'block';
+        editPasswordModal.style.display = 'block';
 
-                cancelEditPasswordBtn.addEventListener("click", function(event) {
-                    event.preventDefault()
-                    editPasswordModal.style.display = 'none'
-                })
+        cancelEditPasswordBtn.addEventListener("click", function(event) {
+            event.preventDefault()
+            editPasswordModal.style.display = 'none'
+        })
 
-                closeEditPasswordModal.addEventListener("click", function() {
-                    editPasswordModal.style.display = 'none'
-                })
-            })
+        closeEditPasswordModal.addEventListener("click", function() {
+            editPasswordModal.style.display = 'none'
+        })
+    })
 
-            deleteBtn.addEventListener("click", function() {
+    deleteBtn.addEventListener("click", function() {
 
-                deletePasswordModal.style.display = "block";
+        deletePasswordModal.style.display = "block";
 
-                confirmDeletePassword.addEventListener("click", function(event) {
-                    event.preventDefault()
+        confirmDeletePassword.addEventListener("click", function(event) {
+            event.preventDefault()
 
-                    console.log(password_id);
-                    fetch('/deletePassword', {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({password_id: password_id})
-                    }).catch(function(error) {console.log(error)})
+            console.log(password_id);
+            fetch('/deletePassword', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({password_id: password_id})
+            }).catch(function(error) {console.log(error)})
 
-                    passwordCard.remove()
+            passwordCard.remove()
 
-                    passwordDeletedImg.style.display = 'block'
-                    document.getElementById("deletePasswordForm").style.display = 'none'
+            passwordDeletedImg.style.display = 'block'
+            document.getElementById("deletePasswordForm").style.display = 'none'
 
-                    setTimeout(function() {
-                        deletePasswordModal.style.display = 'none'
-                        passwordDeletedImg.style.display = 'none'
-                        document.getElementById("deletePasswordForm").style.display = 'block'
-                    }, 2000)
-                })
+            setTimeout(function() {
+                deletePasswordModal.style.display = 'none'
+                passwordDeletedImg.style.display = 'none'
+                document.getElementById("deletePasswordForm").style.display = 'block'
+            }, 2000)
+        })
 
-                cancelDeletePassword.addEventListener("click", function(event) {
-                    event.preventDefault()
-                    deletePasswordModal.style.display = "none";
-                })
+        cancelDeletePassword.addEventListener("click", function(event) {
+            event.preventDefault()
+            deletePasswordModal.style.display = "none";
+        })
 
-                closeDeletePasswordModal.addEventListener("click", function() {
-                    deletePasswordModal.style.display = "none";
-                    console.log(1)
+        closeDeletePasswordModal.addEventListener("click", function() {
+            deletePasswordModal.style.display = "none";
+            console.log(1)
 
-                })
+        })
 
-            })
+    })
+}
+
+function registering(event) {
+    event.preventDefault()
+
+    const website = document.getElementById("website").value;
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    fetch('/addNewPassword', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({website, username, password})
+    }).then(response => {
+        return response.json()
+    })
+        .then(data => {
+            addNewPassword()
         })
 
     document.getElementById("addPasswordForm").reset()

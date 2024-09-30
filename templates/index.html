@@ -22,7 +22,7 @@
     <section class="hero">
         <h1>Secure Password Management for Everyone</h1>
         <p>Keep your digital life safe and organized with KeyGuard</p>
-        <button id="getStartedBtn" class="button button-primary"><a href="{{ url_for('startApp') }}">Get Started</a></button>
+        <button id="getStartedBtn" class="button button-primary">Get Started</button>
     </section>
 
     <section id="features">
@@ -62,11 +62,22 @@
 
 <script>
     document.getElementById("getStartedBtn").addEventListener("click", function (){
-        fetch('/startApp', {
+        const userId = prompt("Enter your user id:")
+        const password = prompt("Enter your password:")
+
+        fetch('/checkUser', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-        }).then(response => {
-            return response.json()
+            body: JSON.stringify({userId: userId, password: password})
+        }).then(response => response.json())
+            .then(data => {
+                console.log(data.userResult)
+
+                if (data.userResult === "True") {
+                    window.location.href = "/startApp"
+                } else {
+                    alert("User couldn't found.")
+                }
         })
     })
 </script>

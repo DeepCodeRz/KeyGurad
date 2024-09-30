@@ -1,3 +1,5 @@
+from crypt import methods
+
 from flask import Flask, render_template, request, jsonify
 import random
 import sqlite3
@@ -24,6 +26,29 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/checkUser', methods=['POST', 'GET'])
+def checkUser():
+    data = request.get_json()
+    user_id = data['userId']
+    password = data['password']
+
+    conn = sqlite3.connect('identifier.sqlite')
+    c = conn.cursor()
+
+    checkUserQ = '''SELECT COUNT(user_id) FROM users WHERE user_id = ? AND password = ?'''
+    c.execute(checkUserQ, (user_id, password))
+
+    userResult = c.fetchone()[0]
+
+    conn.close()
+
+    if userResult == 1:
+        return jsonify({"userResult": "True"})
+    else:
+        return jsonify({"userResult": "False"})
+
+
 
 @app.route('/startApp', methods=['POST', 'GET'])
 def startApp():
@@ -324,4 +349,4 @@ def checkCommonPassword():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5002)
+    app.run(debug=True, port=5003)
