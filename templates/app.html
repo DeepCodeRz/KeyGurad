@@ -164,5 +164,14 @@
 <script src="{{ url_for('static', filename='createPassword.js')}}"></script>
 <script src="{{ url_for('static', filename='securityCheck.js')}}"></script>
 <script src="{{ url_for('static', filename='tabs.js')}}"></script>
+<script>
+    const userPasswords = {{ userPasswords | tojson }};
+
+    console.log(userPasswords[0][0])
+
+    for (let i = 0; i < userPasswords.length; i++){
+        addNewPassword(userPasswords[i][0], userPasswords[i][1], userPasswords[i][2], userPasswords[i][3])
+    }
+</script>
 </body>
 </html>

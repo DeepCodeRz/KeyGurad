@@ -31,7 +31,7 @@ def index():
 @app.route('/checkUser', methods=['POST', 'GET'])
 def checkUser():
     global user_id
-    
+
     data = request.get_json()
     user_id = data['userId']
     password = data['password']
@@ -59,23 +59,20 @@ def startApp():
     c = conn.cursor()
     print(user_id)
 
-    loadPasswordsQ = '''SELECT password FROM password_info WHERE user_id = ?'''
+    loadPasswordsQ = '''SELECT password_id, website, username, password FROM password_info WHERE user_id = ?'''
 
     c.execute(loadPasswordsQ, (user_id,))
-    print(c.fetchall())
+    userPasswords = c.fetchall()
 
-    return render_template('app.html')
+    print(userPasswords)
+
+    return render_template('app.html', userPasswords = userPasswords)
 
 # Resources of the password that will be created by randomly choosing.
 uppercase_list = "QWERTYUIOPASDFGHJKLZXCVBNM"
 lowercase_list = "qwertyuiopasdfghjklzxcvbnm"
 numbers_list = "0123456789"
 special_list = "!#$%&()*+-./:;<=>?"
-
-# Rendering web template for Front-End.
-@app.route('/')
-def home():
-    return render_template('app.html')
 
 @app.route('/addNewPassword', methods=['POST'])
 def addNewPassword():
