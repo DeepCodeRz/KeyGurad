@@ -33,8 +33,10 @@ def checkUser():
     global user_id
 
     data = request.get_json()
-    email = data['email']
-    password = data['password']
+    print(data)
+
+    email = data.get('email')
+    password = data.get('password')
 
     conn = sqlite3.connect('identifier.sqlite')
     c = conn.cursor()
@@ -45,12 +47,17 @@ def checkUser():
 
     getUserIdQ = '''SELECT user_id FROM users WHERE email = ? AND password = ?'''
     c.execute(getUserIdQ, (email, password))
-    user_id = c.fetchone()[0]
+    user_id_row = c.fetchone()
+
+    if user_id_row:
+        user_id = user_id_row[0]
+    else:
+        user_id = None
 
     conn.close()
 
     if userResult == 1:
-        return jsonify({"userResult": "True"})
+        return jsonify({"userResult": "True", "user_id": user_id})
     else:
         return jsonify({"userResult": "False"})
 
@@ -78,7 +85,7 @@ def createNewUser():
     conn.commit()
     conn.close()
 
-    return render_template('loginAndSignup.html')
+    return jsonify({"userResult": "True", "user_id": user_id})
 
 @app.route('/startApp', methods=['POST', 'GET'])
 def startApp():
@@ -384,4 +391,4 @@ def checkCommonPassword():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5002)
+    app.run(debug=True, port=5005)
