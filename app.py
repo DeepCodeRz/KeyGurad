@@ -33,16 +33,19 @@ def checkUser():
     global user_id
 
     data = request.get_json()
-    user_id = data['userId']
+    email = data['email']
     password = data['password']
 
     conn = sqlite3.connect('identifier.sqlite')
     c = conn.cursor()
 
-    checkUserQ = '''SELECT COUNT(user_id) FROM users WHERE user_id = ? AND password = ?'''
-    c.execute(checkUserQ, (user_id, password))
-
+    checkUserQ = '''SELECT COUNT(email) FROM users WHERE email = ? AND password = ?'''
+    c.execute(checkUserQ, (email, password))
     userResult = c.fetchone()[0]
+
+    getUserIdQ = '''SELECT user_id FROM users WHERE email = ? AND password = ?'''
+    c.execute(getUserIdQ, (email, password))
+    user_id = c.fetchone()[0]
 
     conn.close()
 
@@ -51,13 +54,36 @@ def checkUser():
     else:
         return jsonify({"userResult": "False"})
 
+@app.route('/loginAndSignup', methods=['POST', 'GET'])
+def loginAndSignup():
+    return render_template('loginAndSignup.html')
 
+@app.route('/signup', methods=['POST', 'GET'])
+def createNewUser():
+    global user_id
+
+    conn = sqlite3.connect('identifier.sqlite')
+    c = conn.cursor()
+
+    data = request.get_json()
+    user_id = random.randint(10000000, 99999999)
+    fullname = data['fullname']
+    email = data['email']
+    password = data['password']
+
+    insertUserQ = '''INSERT INTO users (user_id, fullname, email, password)
+                     VALUES (?, ?, ?, ?)'''
+
+    c.execute(insertUserQ, (user_id, fullname, email, password))
+    conn.commit()
+    conn.close()
+
+    return render_template('loginAndSignup.html')
 
 @app.route('/startApp', methods=['POST', 'GET'])
 def startApp():
     conn = sqlite3.connect('identifier.sqlite')
     c = conn.cursor()
-    print(user_id)
 
     loadPasswordsQ = '''SELECT password_id, website, username, password FROM password_info WHERE user_id = ?'''
 
@@ -67,10 +93,6 @@ def startApp():
     print(userPasswords)
 
     return render_template('app.html', userPasswords = userPasswords)
-
-@app.route('/loginAndSignup', methods=['POST', 'GET'])
-def loginAndSignup():
-    return render_template('loginAndSignup.html')
 
 # Resources of the password that will be created by randomly choosing.
 uppercase_list = "QWERTYUIOPASDFGHJKLZXCVBNM"
@@ -362,4 +384,4 @@ def checkCommonPassword():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5003)
+    app.run(debug=True, port=5002)

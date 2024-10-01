@@ -46,7 +46,7 @@
           <label for="signupConfirmPassword">Confirm Password</label>
           <input type="password" id="signupConfirmPassword" required>
         </div>
-        <button type="submit" class="button">Sign Up</button>
+        <button id="signupBtn" class="button">Sign Up</button>
       </form>
       <div class="toggle-form">
         <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
@@ -75,14 +75,16 @@
     });
   });
 
-  document.getElementById("loginBtn").addEventListener("click", function (){
-    const userId = document.getElementById("loginEmail").value
+  document.getElementById("loginBtn").addEventListener("click", function (event){
+    event.preventDefault()
+
+    const email = document.getElementById("loginEmail").value
     const password = document.getElementById("loginPassword").value
 
     fetch('/checkUser', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({userId: userId, password: password})
+      body: JSON.stringify({email: email, password: password})
     }).then(response => response.json())
             .then(data => {
               console.log(data.userResult)
@@ -93,6 +95,31 @@
                 alert("User couldn't found.")
               }
             })
+  })
+
+  document.getElementById("signupBtn").addEventListener("click", function (event){
+    event.preventDefault()
+
+    const fullname = document.getElementById("signupName").value
+    const email = document.getElementById("signupEmail").value
+    const password = document.getElementById("signupPassword").value
+    const confirmPassword = document.getElementById("signupConfirmPassword").value
+
+
+    if (password === confirmPassword) {
+      fetch('/signup', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({fullname: fullname, email: email, password: password})
+      }).then(response => response.json())
+              .then(data => {
+                console.log(data)
+                window.location.href = "/startApp"
+              })
+    } else {
+      alert("Passwords doesnt match")
+    }
+
   })
 </script>
 </body>
