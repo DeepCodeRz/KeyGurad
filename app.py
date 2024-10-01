@@ -68,8 +68,8 @@ def startApp():
 
     return render_template('app.html', userPasswords = userPasswords)
 
-@app.route('/startApp', methods=['POST', 'GET'])
-def loginAndSignup:
+@app.route('/loginAndSignup', methods=['POST', 'GET'])
+def loginAndSignup():
     return render_template('loginAndSignup.html')
 
 # Resources of the password that will be created by randomly choosing.

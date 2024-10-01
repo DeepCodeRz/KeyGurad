@@ -21,7 +21,7 @@
           <label for="loginPassword">Password</label>
           <input type="password" id="loginPassword" required>
         </div>
-        <button type="submit" class="button">Login</button>
+        <button id="loginBtn" class="button">Login</button>
       </form>
       <div class="toggle-form">
         <p>Don't have an account? <a href="#" id="showSignup">Sign up</a></p>
@@ -74,6 +74,26 @@
       loginForm.style.display = 'block';
     });
   });
+
+  document.getElementById("loginBtn").addEventListener("click", function (){
+    const userId = document.getElementById("loginEmail").value
+    const password = document.getElementById("loginPassword").value
+
+    fetch('/checkUser', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({userId: userId, password: password})
+    }).then(response => response.json())
+            .then(data => {
+              console.log(data.userResult)
+
+              if (data.userResult === "True") {
+                window.location.href = "/startApp"
+              } else {
+                alert("User couldn't found.")
+              }
+            })
+  })
 </script>
 </body>
 </html>

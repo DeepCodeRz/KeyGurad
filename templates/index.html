@@ -62,24 +62,7 @@
 
 <script>
     document.getElementById("getStartedBtn").addEventListener("click", function (){
-        const userId = prompt("Enter your user id:")
-        const password = prompt("Enter your password:")
         window.location.href = "/loginAndSignup"
-
-        fetch('/checkUser', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({userId: userId, password: password})
-        }).then(response => response.json())
-            .then(data => {
-                console.log(data.userResult)
-
-                if (data.userResult === "True") {
-                    window.location.href = "/startApp"
-                } else {
-                    alert("User couldn't found.")
-                }
-        })
     })
 </script>
 </body>
