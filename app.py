@@ -92,7 +92,7 @@ def startApp():
     conn = sqlite3.connect('identifier.sqlite')
     c = conn.cursor()
 
-    loadPasswordsQ = '''SELECT password_id, website, username, password FROM password_info WHERE user_id = ?'''
+    loadPasswordsQ = '''SELECT password_id, website, username, password, saved_at FROM password_info WHERE user_id = ?'''
 
     c.execute(loadPasswordsQ, (user_id,))
     userPasswords = c.fetchall()

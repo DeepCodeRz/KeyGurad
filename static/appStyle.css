@@ -97,21 +97,58 @@ h2 {
 
 .search-bar {
     display: flex;
-    flex-direction: row; /* Row direction by default */
-    justify-content: space-between; /* Space between elements */
-    margin-bottom: 1rem; /* Margin for spacing */
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    width: 30%;
+    float: right;
 }
 
 #search {
-    flex: 1; /* Make search input flexible */
-    padding: 0.5rem; /* Added padding for better usability */
+    flex: 1;
+    padding: 0.5rem;
 }
 
 .search-bar button {
-    margin-left: 10px; /* Adjust margin */
+    margin-left: 10px;
+}
+
+.orderContainer {
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: 1rem;
+}
+
+.orderContent {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.orderContent a {
+    width: 200px;
+    color: var(--primary-color);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-radius: 8px;
+}
+
+.orderContent a:hover {
+    background-color: #f1f1f1;
+}
+
+.orderContainer:hover .orderContent {
+    display: block;
 }
 
 .password-list {
+    margin-top: 1rem;
     background-color: var(--header-color);
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -123,7 +160,8 @@ h2 {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    border-bottom: 1px solid var(--border-color);
+    border: 1px solid var(--border-color);
+    border-bottom: none;
 }
 
 .password-item:last-child {
@@ -318,22 +356,22 @@ input[type="checkbox"] {
     }
 
     .search-bar {
-        flex-direction: column; /* Stack search bar elements */
-        align-items: stretch; /* Make elements full width */
+        flex-direction: column;
+        align-items: stretch;
     }
 
     .search-bar button {
-        width: 100%; /* Full width button */
-        margin-left: 0; /* Remove left margin */
-        margin-top: 0.5rem; /* Space above button */
+        width: 100%;
+        margin-left: 0;
+        margin-top: 0.5rem;
     }
 
     .main-content {
-        padding: 1rem; /* Reduced padding for smaller screens */
+        padding: 1rem;
     }
 
     h2 {
-        font-size: 1.5rem; /* Adjust heading size */
+        font-size: 1.5rem;
     }
 }
 

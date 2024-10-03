@@ -16,7 +16,7 @@ const passwordDeletedImg = document.getElementById("passwordDeletedImg");
 const closeDeletePasswordModal = document.getElementById("closeDeletePasswordModal");
 let password_id;
 
-function addNewPassword(passwordId, website, username, password) {
+function addNewPassword(passwordId, website, username, password, date) {
     password_id = passwordId
     const newPassword = document.createElement("div");
     newPassword.id = `${password_id}-password-item`
@@ -31,6 +31,9 @@ function addNewPassword(passwordId, website, username, password) {
                                  <br>
                                  <strong>Password:</strong>
                                  <span id="password-${password_id}" class="hidden" style="color: var(--secondary-text-color);">${password}</span>
+                                 <br>
+                                 <strong>Date:</strong>
+                                 <span id="date-${password_id}" style="color: var(--secondary-text-color);">${date}</span>
                              </div>
                              <div class="password-actions">
                                 <button id="visibility-${password_id}" class="btn btn-icon" aria-label="Show/Hide Password"><i class="ri-eye-line"></i></button>
@@ -208,7 +211,7 @@ function registering(event) {
         return response.json()
     })
         .then(data => {
-            addNewPassword(data["password_id"], website, username, password)
+            addNewPassword(data["password_id"], website, username, password, data["date"])
         })
 
     document.getElementById("addPasswordForm").reset()

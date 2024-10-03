@@ -24,15 +24,24 @@
     <main class="main-content">
         <div id="passwords" class="tab-content active">
             <h2>My Passwords</h2>
+            <button id="addPasswordBtn" class="btn btn-primary" style="margin-top: 1rem;">
+                <i class="ri-add-line"></i> Add New Password
+            </button>
             <div class="search-bar">
                 <input id="search" type="text" placeholder="Search password...">
                 <button class="btn btn-primary" onclick="searchPassword()">Search</button>
             </div>
+            <div class="orderContainer">
+                <button class="btn btn-primary orderBtn">Order</button>
+                <div class="orderContent">
+                    <a href="#">Date (Last-old)</a>
+                    <a href="#">Date (Old-last)</a>
+                    <a href="#">Website</a>
+                    <a href="#">Username</a>
+                </div>
+            </div>
             <div class="password-list">
             </div>
-            <button id="addPasswordBtn" class="btn btn-primary" style="margin-top: 1rem;">
-                <i class="ri-add-line"></i> Add New Password
-            </button>
         </div>
 
         <div id="addPasswordModal" class="modal">
@@ -161,6 +170,7 @@
 
 <script src="{{ url_for('static', filename='passwordHub.js')}}"></script>
 <script src="{{ url_for('static', filename='searchPassword.js')}}"></script>
+<script src="{{ url_for('static', filename='orderPassword.js')}}"></script>
 <script src="{{ url_for('static', filename='createPassword.js')}}"></script>
 <script src="{{ url_for('static', filename='securityCheck.js')}}"></script>
 <script src="{{ url_for('static', filename='tabs.js')}}"></script>
@@ -170,7 +180,7 @@
     console.log(userPasswords[0][0])
 
     for (let i = 0; i < userPasswords.length; i++){
-        addNewPassword(userPasswords[i][0], userPasswords[i][1], userPasswords[i][2], userPasswords[i][3])
+        addNewPassword(userPasswords[i][0], userPasswords[i][1], userPasswords[i][2], userPasswords[i][3], userPasswords[i][4])
     }
 </script>
 </body>
