@@ -33,7 +33,7 @@ function addNewPassword(passwordId, website, username, password, date) {
                                  <span id="password-${password_id}" class="hidden" style="color: var(--secondary-text-color);">${password}</span>
                                  <br>
                                  <strong>Date:</strong>
-                                 <span id="date-${password_id}" style="color: var(--secondary-text-color);">${date}</span>
+                                 <span class="date" id="date-${password_id}" style="color: var(--secondary-text-color);">${date}</span>
                              </div>
                              <div class="password-actions">
                                 <button id="visibility-${password_id}" class="btn btn-icon" aria-label="Show/Hide Password"><i class="ri-eye-line"></i></button>

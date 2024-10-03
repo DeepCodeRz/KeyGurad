@@ -17,33 +17,31 @@ for (let i = 0; i < orderOptions.length; i++) {
         let sortType = orderOptions[i].innerHTML
         console.log(sortType)
 
+        sortList()
         function sortList() {
             let passwordList = document.getElementById('password-list');
             let passwordArray = Array.from(document.getElementsByClassName('password-item'));
 
             passwordArray.sort(function(a, b) {
-                let aValue = parseInt(a.getAttribute('data-value'));
-                let bValue = parseInt(b.getAttribute('data-value'));
-
                 if (sortType === 'Date (Last-old)') {
-                    let aValue = parseInt(a.getAttribute('data-value'));
-                    let bValue = parseInt(b.getAttribute('data-value'));
+                    let aValue = new Date(a.getElementsByClassName("date")[0].innerHTML);
+                    let bValue = new Date(b.getElementsByClassName("date")[0].innerHTML);
                     return aValue - bValue;
                 } else if (sortType === 'Date (Old-last)') {
-                    let aValue = parseInt(a.getAttribute('data-value'));
-                    let bValue = parseInt(b.getAttribute('data-value'));
-                    return aValue - bValue;
+                    let aValue = new Date(a.getElementsByClassName("date")[0].innerHTML);
+                    let bValue = new Date(b.getElementsByClassName("date")[0].innerHTML);
+                    return bValue - aValue;
                 } else if (sortType === 'Security Level') {
-                    let aValue = parseInt(a.getAttribute('data-value'));
-                    let bValue = parseInt(b.getAttribute('data-value'));
+                    let aValue = new Date(a.getElementsByClassName("date")[0].innerHTML);
+                    let bValue = new Date(b.getElementsByClassName("date")[0].innerHTML);
                     return aValue - bValue;
                 } else if (sortType === 'Website') {
-                    let aValue = parseInt(a.getAttribute('data-value'));
-                    let bValue = parseInt(b.getAttribute('data-value'));
+                    let aValue = new Date(a.getElementsByClassName("date")[0].innerHTML);
+                    let bValue = new Date(b.getElementsByClassName("date")[0].innerHTML);
                     return aValue - bValue;
                 } else if (sortType === 'Username') {
-                    let aValue = parseInt(a.getAttribute('data-value'));
-                    let bValue = parseInt(b.getAttribute('data-value'));
+                    let aValue = new Date(a.getElementsByClassName("date")[0].innerHTML);
+                    let bValue = new Date(b.getElementsByClassName("date")[0].innerHTML);
                     return aValue - bValue;
                 }
             });

@@ -6,7 +6,7 @@
     --text-color: #020817; /* Very Dark Blue */
     --secondary-text-color: #64748B; /* Grayish Blue */
     --border-color: #E2E8F0; /* Light Grayish Blue */
-    --hover-background-color: #020817; /* Very Dark Blue */
+    --hover-background-color: #1d263d; /* Very Dark Blue */
     --hover-text-color: #FFFFFF; /* White for hover states */
 }
 
@@ -68,7 +68,7 @@ body {
 }
 
 .nav-links a:hover, .nav-links a.active {
-    background-color: var(--hover-background-color);
+    background-color: var(--primary-color);
     color: var(--hover-text-color); /* White text on hover */
 }
 
