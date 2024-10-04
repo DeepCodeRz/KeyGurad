@@ -24,15 +24,14 @@ function addNewPassword(passwordId, website, username, password, date) {
     newPassword.className = `password-item`;
     newPassword.innerHTML = `<div>
                                  <strong>Website:</strong>
-                                 <span class="website" id="website-${password_id}" style="color: var(--secondary-text-color);">${website}</span>
-                                 <br>
-                                 <strong>Username:</strong>
+                                 <span class="website" id="website-${password_id}" style="display: inline-block; width: 6rem; color: var(--secondary-text-color);">${website}</span>
+                                 <strong style="">Username:</strong>
                                  <span class="username" id="username-${password_id}" style="color: var(--secondary-text-color);">${username}</span>
                                  <br>
-                                 <strong>Password:</strong>
-                                 <span id="password-${password_id}" class="hidden" style="color: var(--secondary-text-color);">${password}</span>
                                  <br>
-                                 <strong>Date:</strong>
+                                 <strong>Password:</strong>
+                                 <span id="password-${password_id}" class="hidden" style="display: inline-block; width: 5.2rem; color: var(--secondary-text-color);">${password}</span>
+                                 <strong style="">Date:</strong>
                                  <span class="date" id="date-${password_id}" style="color: var(--secondary-text-color);">${date}</span>
                              </div>
                              <div class="password-actions">
