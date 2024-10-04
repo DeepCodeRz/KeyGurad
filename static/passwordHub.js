@@ -61,6 +61,8 @@ function addNewPassword(passwordId, website, username, password, date) {
     const usernameSpan = document.getElementById(`username-${password_id}`);
     const passwordSpan = document.getElementById(`password-${password_id}`);
 
+    countPassword()
+
     visibilityBtn.addEventListener("click", function() {
         if (passwordSpan.classList.contains('hidden')) {
             visibilityBtn.innerHTML = `<i class="ri-eye-off-line"></i>`;
@@ -161,13 +163,11 @@ function addNewPassword(passwordId, website, username, password, date) {
     })
 
     deleteBtn.addEventListener("click", function() {
-
         deletePasswordModal.style.display = "block";
 
         confirmDeletePassword.addEventListener("click", function(event) {
             event.preventDefault()
 
-            console.log(password_id);
             fetch('/deletePassword', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -194,10 +194,9 @@ function addNewPassword(passwordId, website, username, password, date) {
         closeDeletePasswordModal.addEventListener("click", function() {
             deletePasswordModal.style.display = "none";
             console.log(1)
-
         })
-
     })
+
 }
 
 function registering(event) {

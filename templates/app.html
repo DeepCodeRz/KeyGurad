@@ -27,6 +27,7 @@
             <button id="addPasswordBtn" class="btn btn-primary" style="margin-top: 1rem;">
                 <i class="ri-add-line"></i> Add New Password
             </button>
+            <button id="deleteAllPasswords" class="btn btn-icon" aria-label="Delete Password" style="float: right; margin-top: 2px"><i class="ri-delete-bin-line"></i></button>
             <div class="search-bar orderContainer">
                 <input id="search" type="text" list="webSiteSearchList" placeholder="Search password...">
                 <datalist id="webSiteSearchList">
@@ -42,6 +43,7 @@
                     <option value="username">Username</option>
                 </select>
             </div>
+            <p style="padding: 8px 5px 8px 5px;" class="orderContainer" id="passwordCounter"></p>
             <div class="password-list">
             </div>
         </div>
@@ -177,13 +179,55 @@
 <script src="{{ url_for('static', filename='securityCheck.js')}}"></script>
 <script src="{{ url_for('static', filename='tabs.js')}}"></script>
 <script>
-    const userPasswords = {{ userPasswords | tojson }};
-
-    console.log(userPasswords[0][0])
+    const userPasswords = {{ userPasswords | tojson }}
 
     for (let i = 0; i < userPasswords.length; i++){
         addNewPassword(userPasswords[i][0], userPasswords[i][1], userPasswords[i][2], userPasswords[i][3], userPasswords[i][4])
     }
+
+    const deleteAllPasswords = document.getElementById("deleteAllPasswords")
+
+    deleteAllPasswords.addEventListener("click", function () {
+        let allPasswords = document.getElementsByClassName("password-list")[0]
+        deletePasswordModal.style.display = "block";
+        console.log(allPasswords)
+
+        confirmDeletePassword.addEventListener("click", function(event) {
+            event.preventDefault()
+
+            while (allPasswords.firstChild) {
+                allPasswords.removeChild(allPasswords.firstChild);
+            }
+
+            passwordDeletedImg.style.display = 'block'
+            document.getElementById("deletePasswordForm").style.display = 'none'
+
+            setTimeout(function() {
+                deletePasswordModal.style.display = 'none'
+                passwordDeletedImg.style.display = 'none'
+                document.getElementById("deletePasswordForm").style.display = 'block'
+            }, 2000)
+        })
+
+        cancelDeletePassword.addEventListener("click", function(event) {
+            event.preventDefault()
+            deletePasswordModal.style.display = "none";
+        })
+
+        closeDeletePasswordModal.addEventListener("click", function() {
+            deletePasswordModal.style.display = "none";
+            console.log(1)
+        })
+    })
+
+    function countPassword() {
+        let passwordCount = document.getElementsByClassName("password-item").length
+        const passwordCounter = document.getElementById("passwordCounter")
+
+        passwordCounter.innerText = `Total password: ${passwordCount}`
+    }
+
+    countPassword()
 </script>
 </body>
 </html>
