@@ -42,8 +42,13 @@ function addNewPassword(passwordId, website, username, password, date) {
                                 <button id="delete-${password_id}" class="btn btn-icon" aria-label="Delete Password"><i class="ri-delete-bin-line"></i></button>
                              </div>`;
 
-
     passwordList.appendChild(newPassword);
+
+    const webSiteSearchList = document.getElementById("webSiteSearchList");
+
+    const newSearchWebsite = document.createElement("option")
+    newSearchWebsite.innerHTML = `<option value="${website}">`
+    webSiteSearchList.appendChild(newSearchWebsite);
 
     const passwordCard = document.getElementById(`${password_id}-password-item`);
     const visibilityBtn = document.getElementById(`visibility-${password_id}`);

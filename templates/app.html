@@ -28,7 +28,9 @@
                 <i class="ri-add-line"></i> Add New Password
             </button>
             <div class="search-bar">
-                <input id="search" type="text" placeholder="Search password...">
+                <input id="search" type="text" list="webSiteSearchList" placeholder="Search password...">
+                <datalist id="webSiteSearchList">
+                </datalist>
                 <button class="btn btn-primary" onclick="searchPassword()">Search</button>
             </div>
             <div class="orderContainer">
