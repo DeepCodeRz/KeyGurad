@@ -19,8 +19,9 @@ for (let i = 0; i < orderOptions.length; i++) {
 
         sortList()
         function sortList() {
-            let passwordList = document.getElementById('password-list');
+            let passwordList = document.getElementsByClassName('password-list')[0];
             let passwordArray = Array.from(document.getElementsByClassName('password-item'));
+            console.log(passwordArray)
 
             passwordArray.sort(function(a, b) {
                 if (sortType === 'Date (Last-old)') {
@@ -31,20 +32,19 @@ for (let i = 0; i < orderOptions.length; i++) {
                     let aValue = new Date(a.getElementsByClassName("date")[0].innerHTML);
                     let bValue = new Date(b.getElementsByClassName("date")[0].innerHTML);
                     return bValue - aValue;
-                } else if (sortType === 'Security Level') {
-                    let aValue = new Date(a.getElementsByClassName("date")[0].innerHTML);
-                    let bValue = new Date(b.getElementsByClassName("date")[0].innerHTML);
-                    return aValue - bValue;
                 } else if (sortType === 'Website') {
-                    let aValue = new Date(a.getElementsByClassName("date")[0].innerHTML);
-                    let bValue = new Date(b.getElementsByClassName("date")[0].innerHTML);
-                    return aValue - bValue;
+                    let aValue = a.getElementsByClassName("website")[0].innerHTML;
+                    let bValue = b.getElementsByClassName("website")[0].innerHTML;
+                    return aValue.localeCompare(bValue);
                 } else if (sortType === 'Username') {
-                    let aValue = new Date(a.getElementsByClassName("date")[0].innerHTML);
-                    let bValue = new Date(b.getElementsByClassName("date")[0].innerHTML);
-                    return aValue - bValue;
+                    let aValue = a.getElementsByClassName("username")[0].innerHTML;
+                    let bValue = b.getElementsByClassName("username")[0].innerHTML;
+                    return aValue.localeCompare(bValue);
                 }
             });
+            console.log(passwordArray)
+
+
 
             passwordList.innerHTML = '';
 
