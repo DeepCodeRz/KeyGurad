@@ -115,9 +115,12 @@ h2 {
 
 .orderContainer {
     position: relative;
-    display: inline-block;
     float: right;
     margin-right: 1rem;
+    display: flex;
+    border:1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 5px 5px 5px 8px;
 }
 
 .orderContent {
@@ -128,6 +131,7 @@ h2 {
     z-index: 1;
     border: 1px solid var(--border-color);
     border-radius: 8px;
+
 }
 
 .orderContent a {

@@ -27,20 +27,20 @@
             <button id="addPasswordBtn" class="btn btn-primary" style="margin-top: 1rem;">
                 <i class="ri-add-line"></i> Add New Password
             </button>
-            <div class="search-bar">
+            <div class="search-bar orderContainer">
                 <input id="search" type="text" list="webSiteSearchList" placeholder="Search password...">
                 <datalist id="webSiteSearchList">
                 </datalist>
                 <button class="btn btn-primary" onclick="searchPassword()">Search</button>
             </div>
             <div class="orderContainer">
-                <button class="btn btn-primary orderBtn">Order</button>
-                <div class="orderContent">
-                    <a href="#">Date (Last-old)</a>
-                    <a href="#">Date (Old-last)</a>
-                    <a href="#">Website</a>
-                    <a href="#">Username</a>
-                </div>
+                <p style="margin-top: 2px">Order by:</p>
+                <select class="orderSelect btn  orderBtn" id="orderSelect">
+                    <option value="last-old" >Date (Last-old)</option>
+                    <option value="old-last">Date (Old-last)</option>
+                    <option value="website">Website</option>
+                    <option value="username">Username</option>
+                </select>
             </div>
             <div class="password-list">
             </div>
