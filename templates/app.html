@@ -179,6 +179,13 @@
 <script src="{{ url_for('static', filename='securityCheck.js')}}"></script>
 <script src="{{ url_for('static', filename='tabs.js')}}"></script>
 <script>
+    function countPassword() {
+        let passwordCount = document.getElementsByClassName("password-item").length
+        const passwordCounter = document.getElementById("passwordCounter")
+
+        passwordCounter.innerText = `Total password: ${passwordCount}`
+    }
+
     const userPasswords = {{ userPasswords | tojson }}
 
     for (let i = 0; i < userPasswords.length; i++){
@@ -207,6 +214,8 @@
                 passwordDeletedImg.style.display = 'none'
                 document.getElementById("deletePasswordForm").style.display = 'block'
             }, 2000)
+
+            countPassword()
         })
 
         cancelDeletePassword.addEventListener("click", function(event) {
@@ -219,13 +228,6 @@
             console.log(1)
         })
     })
-
-    function countPassword() {
-        let passwordCount = document.getElementsByClassName("password-item").length
-        const passwordCounter = document.getElementById("passwordCounter")
-
-        passwordCounter.innerText = `Total password: ${passwordCount}`
-    }
 
     countPassword()
 </script>

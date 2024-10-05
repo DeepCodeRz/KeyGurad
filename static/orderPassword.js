@@ -1,4 +1,4 @@
-const orderOptions = document.getElementsByClassName('orderContent')[0].getElementsByTagName('a');
+const orderOptions = document.getElementsByClassName('orderSelect')[0].getElementsByTagName('option');
 
 orderOptions[0].style.backgroundColor = "#020817FF"
 orderOptions[0].style.color = "var(--hover-text-color)"
@@ -7,14 +7,7 @@ for (let i = 0; i < orderOptions.length; i++) {
     orderOptions[i].addEventListener('click', (e) => {
         e.preventDefault();
 
-        for (let i = 0; i < orderOptions.length; i++) {
-            orderOptions[i].style.backgroundColor = ""
-            orderOptions[i].style.color = ""
-        }
-
-        orderOptions[i].style.backgroundColor = "#020817FF"
-        orderOptions[i].style.color = "var(--hover-text-color)"
-        let sortType = orderOptions[i].innerHTML
+        let sortType = orderOptions[i].value
         console.log(sortType)
 
         sortList()
@@ -24,19 +17,19 @@ for (let i = 0; i < orderOptions.length; i++) {
             console.log(passwordArray)
 
             passwordArray.sort(function(a, b) {
-                if (sortType === 'Date (Last-old)') {
+                if (sortType === 'last-old') {
                     let aValue = new Date(a.getElementsByClassName("date")[0].innerHTML);
                     let bValue = new Date(b.getElementsByClassName("date")[0].innerHTML);
                     return aValue - bValue;
-                } else if (sortType === 'Date (Old-last)') {
+                } else if (sortType === 'old-last') {
                     let aValue = new Date(a.getElementsByClassName("date")[0].innerHTML);
                     let bValue = new Date(b.getElementsByClassName("date")[0].innerHTML);
                     return bValue - aValue;
-                } else if (sortType === 'Website') {
+                } else if (sortType === 'website') {
                     let aValue = a.getElementsByClassName("website")[0].innerHTML;
                     let bValue = b.getElementsByClassName("website")[0].innerHTML;
                     return aValue.localeCompare(bValue);
-                } else if (sortType === 'Username') {
+                } else if (sortType === 'username') {
                     let aValue = a.getElementsByClassName("username")[0].innerHTML;
                     let bValue = b.getElementsByClassName("username")[0].innerHTML;
                     return aValue.localeCompare(bValue);

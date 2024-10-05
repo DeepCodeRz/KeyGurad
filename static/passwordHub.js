@@ -176,6 +176,8 @@ function addNewPassword(passwordId, website, username, password, date) {
 
             passwordCard.remove()
 
+            countPassword()
+
             passwordDeletedImg.style.display = 'block'
             document.getElementById("deletePasswordForm").style.display = 'none'
 
