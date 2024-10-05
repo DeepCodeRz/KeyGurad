@@ -125,13 +125,16 @@ def addNewPassword():
     c.execute(insert_query, (user_id, website, username, password))
     conn.commit()
 
-    id_query = '''SELECT password_id FROM password_info ORDER BY password_id DESC LIMIT 1;'''
+    id_query = '''SELECT password_id, saved_at FROM password_info ORDER BY password_id DESC LIMIT 1;'''
     c.execute(id_query)
 
-    password_id = c.fetchone()[0]
+    result = c.fetchone()
+    password_id = result[0]
+    saved_at = result[1]
+
     conn.close()
 
-    return jsonify({'password_id': password_id})
+    return jsonify({'password_id': password_id, "date": saved_at})
 
 @app.route('/editPassword', methods=['POST'])
 def editPassword():
