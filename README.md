@@ -42,7 +42,7 @@ KeyGuard is a web application that allows users to securely store, manage, and v
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/DeepoweRs/KeyGuard.git
+   git clone https://github.com/DeepCodeRz/KeyGuard.git
    ```
 2. Navigate to the project directory:
    ```bash
