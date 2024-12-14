@@ -58,7 +58,7 @@ KeyGuard is a web application that allows users to securely store, manage, and v
    ```
 
 
-## Note
-This project's front-end development has utilized artificial intelligence v0.dev. Icons from [remixicon](https://remixicon.com/).
+## Credits
+This project's front-end development has utilized artificial intelligence v0.dev. Icons in this project is from [remixicon](https://remixicon.com/).
 
 --- 
